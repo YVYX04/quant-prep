@@ -1,0 +1,26 @@
+---
+title: "Options, Futures, and Other Derivatives"
+subtitle: "Summary of Selected Chapters"
+
+author:
+  name: "Yvan Richard"
+  email: "yvan.richard2004@gmail.com"
+
+date: today
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: true
+    code-tools: true
+    code-copy: true
+    code-overflow: wrap
+    html-math-method: katex
+---
+
+# Foreword
+
+Aa.
