@@ -1,0 +1,127 @@
+---
+title: "A Practical Guide to Quantitative Finance Interviews (Zhou, X.)"
+subtitle: "Summary of Selected Chapters"
+
+author:
+  name: "Yvan Richard"
+  email: "yvan.richard2004@gmail.com"
+
+date: today
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: true
+    code-tools: true
+    code-copy: true
+    code-overflow: wrap
+    html-math-method: katex
+---
+
+# Foreword
+
+[to be completed]
+
+# Brain Teasers
+
+## Problem Simplification
+
+The schema trained here is simple: whenever a problem appears to dauting to solve it as is, try to solve one of its reduced form.
+Once you solved the first few steps, gradually increase the complexity to uncover the *general* solution.
+
+### Screwy Pirates
+
+**Problem**  
+
+Five pirates $\{1, \cdots, 5\}$ looted a chest full of 100 gold coins. They agree on the following method to split the loot:
+ 
+The most senior pirate, $5$, will propose a distribution of the coins: $(x_1, x_2, x_3, x_4, x_5)$ where $\sum_{k=1}^{5} x_k = 100$.
+If **at least** $50\%$ of the pirates accept the split, the loot is divided as proposed. Otherwise, the pirate $5$ is killed and the procedure
+repeats with pirate $4$. Given that each pirate is rational, wants to stay alive first and get as much gold as possible second, what will be the final split?
+
+**Solution**
+
+[to be completed]
+
+### Tiger and sheep
+
+**Problem**   
+
+One hundred tigers and one sheep are put on an island where we only have grass. Both sheep and tigers can eat grass to survive.
+Tigers prefer to eat sheep rather than grass, but want to survive first. Whenever a tiger eats a sheep, that tiger becomes a sheep. So if we start in the
+initial situation and one tiger eats a sheep, we have $(1, 100) \to (1, 99)$. Given that all tigers are rational, will the sheep be eaten?
+
+**Solution**
+
+[to be completed]
+
+## Logic Reasoning
+
+### Birthday problem
+
+**Problem**   
+
+You and your colleagues know the following information (public knowledge).
+Your boss $A$'s birthday is one of the following 10 dates:
+
+```{txt}
+March: 4, 5, 8
+June: 4, 7
+September: 1, 5
+December: 1, 2, 8
+```
+
+$A$ told you **only** the month of his birthday, and told you colleague $C$ **only** the day.
+After that you said:
+
+"I don't know $A$'s birthday; C doesn't know either."
+
+After hearing this, $C$ said:
+
+"I did not know the date, but now I know it."
+
+You smiled and said:
+
+"Now, I know it too!".
+
+What is the date of $A$'s birthday?
+
+**Solution**
+
+1. We don't know the date and knows that $C$ does not either. How is it possible for us to know this? Because we know that the date's day is **necessarily repeated**. Hence, the possible candidates month becomes: `March` and `September`. Once we communicate this, $C$ can also *infer* this.
+2. $C$ was directly able to identify $A$'s birthday date. How? We need to remove all the dates with day `5`. Then, $C$ has enough information to find among: `Sep. 1`, `Mar. 4`, or `Mar. 8`. $C$ communicates.
+3. Now, $A$ is able to find it, meaning that it must be `Sep. 1`.
+
+### Card Game
+
+**Problem**
+
+A casino offers a card game using a normal deck of 52 cards.
+The rule is that you turn over two cards each time. For each pair,
+if both are black, they go to the dealer's pile, if both are red, to yours.
+Otherwise, they are discarded. The process is repeated until we go through the 52 cards.
+If you have **strictly** more cards in your pile, you win $\$$ 100; otherwise, nothing.
+Being rational, how much are you willing to pay to play the game?
+
+**Solution**
+
+*Assumption 1: the cards are not drawn from the "dealer's pile"*.
+
++ We have 36 red cards and 36 black cards.
++ Whenever we completely discard two cards, it is a neutral operation since we loose both 1 red and one black card, and no one gets cards.
++ When we win two red cards (i.e. $+2$ in our count), this also means that the deck has now two more black cards, e.g.: $(\text{# red}, \text{# black}) := (36, 36) \to (34, 36)$,
+so drawing two black cards at the same time is more likely.
++ When $\text{# red} = \text{# black} = n$, the probability of drawing two red cards is $p_r$ and the one of drawing to black cards $p_b$, are equal: $p_r = p_b = p$ where
+
+$$
+p = \frac{1}{2} \cdot \frac{n/ 2 - 1}{n - 1} = \frac{1}{4} \frac{n - 2}{n - 1}
+$$
+
+
+
+
+
+
