@@ -19,6 +19,8 @@ format:
     code-copy: true
     code-overflow: wrap
     html-math-method: katex
+
+jupyter: quant-prep
 ---
 
 # Foreword
@@ -110,16 +112,64 @@ Being rational, how much are you willing to pay to play the game?
 
 *Assumption 1: the cards are not drawn from the "dealer's pile"*.
 
-+ We have 36 red cards and 36 black cards.
-+ Whenever we completely discard two cards, it is a neutral operation since we loose both 1 red and one black card, and no one gets cards.
-+ When we win two red cards (i.e. $+2$ in our count), this also means that the deck has now two more black cards, e.g.: $(\text{# red}, \text{# black}) := (36, 36) \to (34, 36)$,
-so drawing two black cards at the same time is more likely.
-+ When $\text{# red} = \text{# black} = n$, the probability of drawing two red cards is $p_r$ and the one of drawing to black cards $p_b$, are equal: $p_r = p_b = p$ where
+This game is purely deterministic. Indeed, whenever we draw two red cards, we automatically loose one
+opportunity to counter the black cards in the future (i.e. at least one pair of two black cards will
+necessarily be drawn from the pile). Therefore, in the end, the two players end up with exactly the same
+number of cards in their pile. However, since the house wins in the event of a draw, we will **always** loose.
+As such, we should **not** invest any money in this game.
 
-$$
-p = \frac{1}{2} \cdot \frac{n/ 2 - 1}{n - 1} = \frac{1}{4} \frac{n - 2}{n - 1}
-$$
 
+### Burning ropes
+
+**Problem**
+
+You have two different ropes $r1$ and $r2$. Each rope will take exactly one hour to burn. However,
+both ropes have different densities at different points, so there is no guarantee that they will burn regularly.
+Given that the density patterns are not necessarily the same for each rope, how do you use the two ropes to measure 45 minutes?
+
+**Solution**
+
+- For rope $r1$, we can light both ends of the rope so that it burns twice as fast: 30 minutes.
+- Simultaneously, when we light both ends of $r1$, we light only one end of rope $r2$.
+- Exactly when rope $r1$ has finished burning, we know that 30 minutes have passed. At this point, rope $r2$ would still take another 30 minutes to burn completely. However, if we light the other end of $r2$ now, it will take only half that time, so 15 minutes.
+- Once $r2$ has finished burning, exactly 45 minutes will have passed.
+
+### Defective Balls
+
+**Problem**
+
+You have 12 identical balls. One of the balls is heavier OR lighter than the rest (you
+don't know which). Using just a balance that can only show you which side of the tray is
+heavier, how can you determine which ball is the defective one with 3 measurements?
+
+**Solution**
+
+We put 6 balls on each side of the scale. We spot the heaviest group (the heavy ball is indicate by a $1$):
+
+```{txt}
+              \oooooo/
+         /-x-/ 
+\ooo1oo/   |
+```
+
+Now we only have 6 balls. We take 4 of these and put two on each side of the scale. We have three groups: $a$, $b$, and $c$.
+
+```{txt}
+               (b)                                    (a)        (b)
+              \oo/                                   (oo)---x---(oo)
+    (a)  /-x-/                                              |
+    \1o/   |         (oo)   (c)                OR           |          (o1) (c)
+```
+
+The heaviest ball will be in one of the three groups and the operation allows to determine which one (as illustrated by the schema). Finally, we will only have two balls to measure.
+
+### Trailing zeros
+
+**Problem**
+
+How many trailing zeros are there in $100!$?
+
+**Solution**
 
 
 
