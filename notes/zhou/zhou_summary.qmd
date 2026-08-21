@@ -20,7 +20,7 @@ format:
     code-overflow: wrap
     html-math-method: katex
 
-jupyter: quant-prep
+jupyter: python3
 ---
 
 # Foreword
@@ -198,7 +198,7 @@ identify them?
 
 **Solution**
 
-The number of races was correctly found but the procedure was slightly clunky.
+`not completed`.
 
 
 ### Infinite Sequence
@@ -209,9 +209,61 @@ If `x^x^x^x^x^x^(...) = 2`, where `x^x` = $x^x$, what is $x$?
 
 **Solution**
 
-We know that $x \in (1, 2)$.
+Let
 
 $$
-{m/n}^{m/n} = \sqrt[n]{(\frac{m}{n})^m} < 2 \iff 2^n > ()
+y = x^{x^{x^{x^{\cdot^{\cdot^\cdot}}}}}.
 $$
+
+We are given that $y=2$. Because removing the bottom $x$ from an infinite power sequence leaves the same sequence,
+
+$$
+y=x^y.
+$$
+
+Substituting $y=2$,
+
+$$
+2=x^2 \implies x = \sqrt{2}
+$$
+
+
+## Thinking Out of the Box
+
+### Door to offer
+
+**Problem**
+
+We face two doors. Behind one door is our dream quant job offer, behind the other, an email starting with "Thank you for taking the time to consider opportunities at ...".
+The doors are guarded by two interns, $A$ and $B$. One intern always tells the truth, one always lies but we don't know who does what. Given that you can only ask one closed question (yes/no) and you want to obtain the job, what question will you ask?
+
+```{text}
+                                  
+          _A_           _B_        
+         |  .|         |  .|        
+_________|   |_________|   |________
+```
+
+
+**Solution**
+
+"If I asked you whether this door leads to the offer, would you say yes?"
+
+### Message delivery
+
+**Problem**
+
+You need  to communicate with your colleague in Greenwich via a messenger service.
+Your documents are sent in a padlock box. Unfortunately the messenger service is not secure,
+so anything inside an unlocked box will be lost (including any locks you place inside the box) during
+the delivery. The high-security padlocks you and your colleague each use have only one key which the person placing
+the lock owns. How can you securely send a document to your colleague?
+
+**Solution**
+
+Aa.
+
+
+
+
 
