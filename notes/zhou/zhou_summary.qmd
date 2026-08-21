@@ -171,7 +171,47 @@ How many trailing zeros are there in $100!$?
 
 **Solution**
 
+A trailing 0 will appear once we multiply by 2 and 5. For instance:
+
+$$
+0! = 1, 1! = 1, 2! = 2, 3! = 6, 4! = 24, 5! = 120.
+$$
+
+Therefore, we need to count the number of paired $(2, 5)$ until reaching $100$. Evidently,
+the number $2$ will appear far more often than the number $5$; thus, $5$ is an upper bound.
+We now need to determine how many times the number $5$ appears.
+
+First of all, we have 20 multiples of 5 until 100. However, when we multiply by 25, we have two
+occurences of 5. This increases the count to 21. We also have $50 = 5 \times 5 \times 2$, so our count reaches 22.
+We do not forget $75 = 5 \times 5 \times 3$. Then, $100 = 2 \times 5 \times 2 \times 5$. So our final count reaches 24.
+
+We will have 24 trailing 0s in $100!$.
+
+### Horse Race
+
+**Problem**
+
+There are 25 horses, each of which runs at a constant speed that is different from the
+other horses. Since the track only has 5 lanes, each race can have at most 5 horses. If
+you need to find the 3 fastest horses, what is the minimum number of races needed to
+identify them?
+
+**Solution**
+
+The number of races was correctly found but the procedure was slightly clunky.
 
 
+### Infinite Sequence
 
+**Problem**
+
+If `x^x^x^x^x^x^(...) = 2`, where `x^x` = $x^x$, what is $x$?
+
+**Solution**
+
+We know that $x \in (1, 2)$.
+
+$$
+{m/n}^{m/n} = \sqrt[n]{(\frac{m}{n})^m} < 2 \iff 2^n > ()
+$$
 
