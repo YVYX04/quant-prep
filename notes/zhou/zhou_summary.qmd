@@ -261,7 +261,67 @@ the lock owns. How can you securely send a document to your colleague?
 
 **Solution**
 
-Aa.
+Let us suppose that $A$ communicates with $B$ and $A$ is sending a document.
+
+1. $A$ puts the document in the box and locks it with his padlock before sending it to $B$.
+2. $B$ receives the box and also puts a padlock on before sending it back to $A$.
+3. $A$ receives the box, removes his lock, and send it again to $B$.
+4. $B$ unlocks his own lock and reads the document.
+
+
+### Last ball
+
+**Problem**
+
+A bag has 20 blue balls and 14 red balls. Each time you randomly take two balls out. (Assume each ball in the bag has equal probability of being taken.) You do not put these two balls back. Instead, if both balls have the same color, you add a blue ball to the bag; if they have different colors, you add a red ball to the bag. Assume that you have an unlimited supply of blue and red balls. If you keep on repeating this process, what will be the color of the last ball left in the bag? What if the bag has 20 blue balls and 13 red balls instead?
+
+
+**Solution**
+
+This is also a purely deterministic game. Let us suppose that $(b, r)$ denotes the number of blue $b$, and red $r$ balls in the bag.
+Let us suppose that at every round, we draw one red ball and one blue ball, we will go from $(20, 14)$ to $(0, 14)$. At this stage, we will
+necessarily picking only same colored balls, so adding blue balls. Once we have only blue balls, we will progressively eliminate them until we have $0$.
+The color of the last ball will be blue.
+
+On the other hand, let us suppose that we have 13 red balls, i.e. an odd number of red balls. Let us suppose again the following move $(20, 13) \to (0, 13)$. In this case, there is no scenario in which
+the red balls "cancel" each other out, we could arrive at $(6, 1)$ and then $(1, 1)$. That's the only scenario possible for ending the bag, so the last one will be red.
+
+
+## Series Summation
+
+### Clock pieces
+
+**Problem**
+
+A clock (numbered 1–12 clockwise) fell off the wall and broke into three pieces. You find that the sums of the numbers on each piece are equal. What are the numbers on each piece? (No strange-shaped piece is allowed.)
+
+**Solution**
+
+First, we can compute $sum_{i = 1}{12} = \frac{(12 + 1)(12)}{2} = \frac{156}{2} = 78$. This means that each piece will have its digits summing to $78/3 = 26$.
+No we need to find the pieces, for instance: $11 + 12 + 1 + 2 = 26$. Then, we $5 + 6 + 7 + 8 = 26$, and with all the other pieces, we can still form one fragement equals to 26.
+
+### Missing Integers
+
+**Problem**
+
+Let us suppose that we have 98 distinct integers $i \in [1, 100]$. How can we find the two missing ones?
+
+**Solution**
+
+We know that the complete sum is $101 \cdot 100 \cdot \frac{1}{2} = 5{,}050$. Let us suppose that $x$ is the sum of all the digits we have. Then,
+we search for a pair $(d_1, d_2)$ where:
+
+$$
+d_1 + d_2 = 5{,}050 - x
+$$
+
+We also know that $d_1, d_2 < (d_1 + d_2)$ so this restrains the search space.
+
+
+
+
+
+
 
 
 
