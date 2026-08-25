@@ -13,14 +13,144 @@ format:
     theme: cosmo
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: true
     code-tools: true
     code-copy: true
     code-overflow: wrap
     html-math-method: katex
+
+bibliography: references.bib
 ---
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import tabulate
+```
 
 # Foreword
 
-Aa.
+This is a non-exhaustive summary of selected chapters from @hull2015.
+
+# 1. Introduction
+
+**Derivative.** A *derivatvive* can be defined as a financial instrument whose value depends on (or derives from) the values of other,
+more basic, underlying variables. Very often the variables uderlying derivatives are the prices of traded assets.
+
+## 1.1. Exchange-traded markets
+
+**A derivatives exchange.** A derivatives exchange is a market where individuals trade standardized contracts that have been defined by the exchange.
+The first market of the kind was established in Chicago in the late 19th century. Once two traders haev agreed on a trade, the transaction is handled by
+the **exchange clearing house**. It stands between the two parties and manages the risks. The old **open outcry system** has been replaced by electronic markets.
+
+## 1.2. Over-the-counter (OTC) markets
+
+Not all derivatives trading is on exchanges. Many trades take place in OTC markets.
+Banks, other large financial institutions, fund managers, and corporations are the main participants
+OTC derivatives markets. Once the two parties have agreed to the trade, they can either proceed bilateraly, or
+through a central counterparty (CCP). The Great Financial Crisis (2008) greatly impacted OTC markets, which faced increased scrutiny.
+Three important changes are:
+
+1. Standardized OTC derivatives in the United States must, whenever possible, be
+traded on what are referred to a swap execution facilities (SEFs). These are
+platforms where market participants can post bid and offer quotes and where
+market participants can choose to trade by accepting the quotes of other market
+participants.
+
+2. There is a requirement in most parts of the world that a CCP be used for most
+standardized derivatives transactions.
+
+3. All trades must be reported to a central registry.
+
+### Size
+
+Both the over-the-counter and the exchange-traded market for derivatives are huge. The
+number of derivatives transactions per year in OTC markets is smaller than in exchange
+traded markets, but the average size of the transactions is much greater.
+
+### 1.3. Forward contracts
+
+**Forward contract.** A *forward contract* is an agreement to buy or sell an asset at a certain future time for a certain price.
+It can be contrasted with a *spot* contracts which is an agreement to buy or sell immediately. A forward is typically traded in OTC markets.
+One party assumes a **long position** (i.e. agree to buy the asset at a defined time and price) and the counterparty assumes a **short position** (i.e.
+agree to sell for the agreed price at the agreed time). This type of contract can be useful to **hedge against FX risk**. For instance, a bank
+could observe the following:
+
+```{python}
+forwards = {
+  "spot": {
+    "bid": 1.5541,
+    "offer": 1.5545
+  },
+  "1m": {
+    "bid": 1.5538,
+    "offer": 1.5543
+  },
+  "3m":
+  {
+    "bid": 1.5533,
+    "offer": 1.5538
+  },
+  "6m":
+  {
+    "bid": 1.5526,
+    "offer": 1.5532
+  }
+}
+
+df = pd.DataFrame(forwards)
+df.head()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 2. Mechanics of futures markets
+
+# 3. Hedging strategies using futures
+
+# 4. Interest rates
+
+# 5. Determination
+
+# 6. Interest rate futures
+
+# 10. Mechanics of option markets
+
+# 11. Properties of stock options
+
+# 18. Futures options
+
+# 19. The Greek letters
+
+# 20. Volatility smiles
