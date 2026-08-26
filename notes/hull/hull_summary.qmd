@@ -21,13 +21,15 @@ format:
     html-math-method: katex
 
 bibliography: references.bib
+
+jupyter: quant-prep
 ---
 
 ```{python}
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import tabulate
+from tabulate import tabulate
 ```
 
 # Foreword
@@ -101,8 +103,11 @@ forwards = {
 }
 
 df = pd.DataFrame(forwards)
-df.head()
+print(tabulate(df.head(), headers=df.columns))
 ```
+
+
+
 
 
 
