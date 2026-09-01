@@ -35,7 +35,7 @@ from tabulate import tabulate
 
 This is a non-exhaustive summary of selected chapters from @hull2015.
 
-# 1. Introduction
+# 1. Introduction {#sec-intro}
 
 **Derivative.** A *derivatvive* can be defined as a financial instrument whose value depends on (or derives from) the values of other,
 more basic, underlying variables. Very often the variables uderlying derivatives are the prices of traded assets.
@@ -229,30 +229,291 @@ This example illustrates a key aspect of hedging. The purpose of hedging is to r
 risk. There is no guarantee that the outcome with hedging will be better than the
 outcome without hedging.
 
+### Hedging Using Options
 
+Options can also be used for hedging. For instance, an investor may own stocks of company $A$.
+If the investor predicts that the share's price of $A$ will fall, he can either unload its positions or
+purchase a put option. An example is laid out below.
 
+An investor owns **100 shares of XYZ**, currently trading at **$50 per share**,
+and wants protection against a significant price decline. He may follow this strategy:
 
+**Hedging strategy:** Buy one put-option contract with:
 
+- **Strike price:** $45
+- **Expiration:** Three months
+- **Premium:** $2 per share ($200 total)
+- **Contract size:** 100 shares
 
+| XYZ price at expiration | Stock value | Put value | Combined value* |
+|---:|---:|---:|---:|
+| $60 | $6,000 | $0 | $5,800 |
+| $50 | $5,000 | $0 | $4,800 |
+| $45 | $4,500 | $0 | $4,300 |
+| $35 | $3,500 | $1,000 | $4,300 |
 
+\*Combined value includes the $200 option premium.
 
+The put creates an effective floor of **$4,300** after accounting for its premium. The investor retains the stock's upside but pays **$200** for downside protection.
 
+**Fundamental Difference**
 
+The fundamental difference between a put and a forward contract is that the forward locks in a certain price, whereas the option contract provides an *insurance* against
+a movement in a particular direction.
 
+## 1.8. Speculators
 
+### Speculating Using Futures
 
+Speculators place a *directional* bet; either they are betting that the price of the asset will go down or up.
+Derivatives are also useful to these agents. For instance, the advantage of futures (compared to directly purchasing the asset) is that
+a small amount of capital is required at the start of the strategy; a large speculative position can be taken by depositing a small outlay in a margin account.
 
+### Speculating Using Options
 
+Let us consider the following scenario. The current price of stock $A$ is USD 20. The speculator estimates that in 3 months, the stock will be up and
+he can afford to invest USD 2,000 in his trading strategy. He has two choices (i) purchase the stock, (ii) buy a call option worth USD 1 with strike $K = 22.50$ (USD), and a maturity
+of three months. We compare these two strategies in two scenarios $a$ (at $t = T$, $A$'s price is 15), $b$ (at $t = T$, $A$'s price is 25).
 
+| Strategy | Initial position | Initial cost | Scenario a: $A_T = \$15$ | Profit/Loss (a) | Return (a) | Scenario b: $A_T = \$25$ | Profit/Loss (b) | Return (b) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Buy stock | 100 shares | 2,000 | 1,500 | −500 | −25% | 2,500 | +500 | +25% |
+| Buy calls ($K = \$22.50$) | 2,000 calls* | 2,000 | $0 | −2,000 | −100% | 5,000 | +3,000 | +150% |
 
+The value of the call position at maturity is:
 
+$$
+2{,}000 \times \max(A_T-K,0)
+$$
 
+- **Scenario a:** $2{,}000 \times \max(15-22.50,0)=\$0$
+- **Scenario b:** $2{,}000 \times \max(25-22.50,0)=\$5{,}000$
 
+\*If one option contract represents 100 shares, the speculator purchases **20 contracts**, representing 2,000 underlying shares.
+
+As one can see, the second strategy has a significantly higher variance.
+
+## 1.9. Aribtrageurs
+
+Arbitrageurs are a third important group of participants in futures, forward, and
+options markets. Arbitrage involves locking in a riskless profit by simultaneously
+entering into transactions in two or more markets.
 
 
 # 2. Mechanics of futures markets
 
+This chapter covers the details of how the futures markets work.
+
+## 2.1. Background
+
+One of the world’s leading futures exchanges is the Chicago Mercantile Exchange (CME) Group. Consider a corn futures contract traded on the exchange. On June 5, a trader in New York instructs a broker to buy one September corn futures contract, representing 5,000 bushels of corn. By taking this long position, the trader agrees to buy corn under the contract’s terms if the position is held through delivery.
+
+The trade requires a corresponding sell order. At approximately the same time, a trader in Kansas might instruct a broker to sell one September corn futures contract, thereby taking a short position. CME’s electronic trading system matches the compatible buy and sell orders at an agreed market price.
+
+After the trade is executed, the CME clearinghouse acts as the intermediary between the two parties, becoming the buyer to the seller and the seller to the buyer. Consequently, the traders do not need to know or assess each other directly. In practice, most futures positions are closed before delivery by entering into an offsetting trade.
+
+### Closing Out Positions
+
+The vast majority of futures contract do not lead to delivery. The reason is that most traders choose to close out
+their positions prior to the delivery period specified in the contract. Closing out a position means entering into the opposite trade
+to the original one. For instance, the New York trader who bought 1 future with a long position on June 5, could sell one on July 20. 
+While the delivery almost never occurs, it still ties the futures price to the spot price.
+
+## 2.2. Specification of a Futures Contract
+
+When developing a new contract, the exchange must specify in some detail the exact
+nature of the agreement between the two parties. In particular, it must specify the **asset**,
+the **contract size** (exactly how much of the asset will be delivered under one contract),
+**where** delivery can be made, and **when** delivery can be made.
+
+When the party with the short position is ready to
+deliver, it files a *notice of intention to deliver with the exchange*.
+
+### The Asset
+
+When the asset is a commodity, there may be quite a variation in the quality of what is
+available in the marketplace. When the asset is specified, it is therefore important that the
+exchange stipulate the grade or grades of the commodity that are acceptable (e.g. not all orange juices are equal!).
+
+### The Contract Size
+
+The contract size specifies the amount of the asset that has to be delivered under one
+contract. This is an important decision for the exchange. If the contract size is too large,
+many investors who wish to hedge relatively small exposures or who wish to take
+relatively small speculative positions will be unable to use the exchange. On the other
+hand, if the contract size is too small, trading may be expensive as there is a cost
+associated with each contract traded.
+
+
+## 2.3. Convergence of Futures Prices to Spot Prices
+
+As the delivery period for a futures contract is approached, the futures price converges
+to the spot price of the underlying asset. When the delivery period is reached, the
+futures price equals (or is very close to) the spot price. This result follows directly from the no-arbitrage condition.
+For instance, if the price of a futures $F_T$ at maturity $T$, is much higher than the price $S_{A, T}$ of stock $T$; the arbitrageur
+will (short) a future, buy the stock, and pocket the difference.
+
+## 2.4. The Operation of Margin Accounts
+
+If two investors get in touch with each other directly and agree to trade an asset in the
+future for a certain price, there are obvious risks. One of the investors may regret the
+deal and try to back out. Alternatively, the investor simply may not have the financial
+resources to honor the agreement. One of the key roles of the exchange is to organize
+trading so that contract defaults are avoided. This is where **margin accounts** come in.
+
+### Daily Settlement
+
+To illustrate how margin accounts work, we consider an investor who contacts his or
+her broker to buy two December gold futures contracts on the COMEX division of the
+New York Mercantile Exchange (NYMEX), which is part of the CME Group. We
+suppose that the current futures price is $1,450 per ounce. Because the contract size is
+100 ounces, the investor has contracted to buy a total of 200 ounces at this price. The
+broker will require the investor to deposit funds in a margin account. The amount that
+must be deposited at the time the contract is entered into is known as the **initial margin**.
+We suppose this is $6,000 per contract, or $12,000 in total. At the end of each trading
+day, the margin account is adjusted to reflect the investor’s gain or loss. This practice is
+referred to as *daily settlement* or *marking to market*.
+
+The investor is entitled to withdraw any amount in the margin account that is in excess of the initial margin.
+However, a *maintenance margin* is set, i.e. a minimal threshold of liquidity in the margin account under which the account should
+not drop. If it does, the investor will receive a **margin call**. The investor is expected to top up the margin account to the initial margin
+level by the end of the next day. The extra funds deposited are known as a *variation
+margin*. If the investor does not provide the variation margin, the broker closes out the
+position.
+
+### The Clearing House and Its Members
+
+A clearing house acts as an intermediary in futures transactions. It guarantees the
+performance of the parties to each transaction. The clearing house has a number of
+members. Brokers who are not members themselves must channel their business
+through a member and post margin with the member. The main task of the clearing
+house is to keep track of all the transactions that take place during a day, so that it can
+calculate the net position of each of its members.
+
+The clearing house member is required to provide initial margin (sometimes referred to
+as clearing margin) reflecting the total number of contracts that are being cleared. There
+is no maintenance margin applicable to the clearing house member. Each day the
+transactions being handled by the clearing house member are settled through the clearing
+house. If in total the transactions have lost money, the member is required to provide
+variation margin to the exchange clearing house; if there has been a gain on the
+transactions, the member receives variation margin from the clearing house.
+
+
+```{mermaid}
+flowchart TB
+
+    A["Buyer A<br/>Wants to go LONG"]
+    B["Seller B<br/>Wants to go SHORT"]
+
+    BA["Broker A"]
+    BB["Broker B"]
+
+    EX["Futures Exchange<br/>Matches buy and sell orders"]
+
+    CH["Clearing House<br/>Central Counterparty"]
+
+    A -->|"Buy order"| BA
+    B -->|"Sell order"| BB
+
+    BA -->|"Submit order"| EX
+    BB -->|"Submit order"| EX
+
+    EX -->|"Matched trade"| CH
+
+    CH -->|"Short side of contract"| BA
+    CH -->|"Long side of contract"| BB
+
+    BA -->|"Long futures position"| A
+    BB -->|"Short futures position"| B
+
+    A -.->|"Initial & variation margin"| BA
+    B -.->|"Initial & variation margin"| BB
+
+    BA -.->|"Margin / daily settlement"| CH
+    BB -.->|"Margin / daily settlement"| CH
+```
+
+## 2.5. OTC Markets
+
+Over-the-counter (OTC) markets, introduced in @sec-intro, are markets where companies
+agree to derivatives transactions without involving an exchange. Credit risk has traditionally been a feature of OTC derivatives markets.
+
+These credit risk might be mitigated with central counterparties (CCP), which work similarly in essence to a clearing house.
+If a derivative transaction in the OTC market does not use a CCP, it is a *bilateral* transaction. In this case, collaterals must be provided
+(similarly to the initial margin in a margin account). This agreement often includes an annex, referred to
+as the credit support annex or CSA
+
+## 2.8. Types of Traders and Types of Order
+
+The **bid** is the highest price a buyer is willing to pay for a financial asset, while the **ask** is the lowest price a seller is willing to accept for it.
+The difference between the ask and bid prices is called the bid–ask spread. The different types of order are:
+
++ **market order**: It is a request that a trade be carried out immediately at the best price available in the market.
++ **limit order**: The order will be executed at a given price or one more favorable to the buyer.
++ **stop order**: The order also specifies a given price and the order is executed once a bid is made at that price (or lower).
++ **stop-limit order**: combination of the above.
+
+## 2.11. Forward vs. Futures Contracts
+
+::: {.callout-important title="Interview Question"}
+ 
+The difference between a forward contract and a futures contract is often asked in quant interviews.
+The table below summarizes the main differences.
+
+:::
+
+| *Forward*                           | *Futures*                |
+|-------------------------------------|--------------------------|
+|Private contract between two parties | Traded on an exchange    |
+| Not standardized | Standardized contract |
+| Usually one specified delivery date | Range of delivery dates |
+|Settled at the end of contract | Settled daily (marking to market) |
+| Delivery or final cash settlement usually takes place | Contract is usually closed out prior to maturity |
+| Some credit risk | Virtually no credit risk (initial and maintenance margin) |
+
 # 3. Hedging strategies using futures
+
+Many of the participants in futures markets are hedgers. Their aim is to use futures
+markets to reduce a particular risk that they face. This risk might relate to fluctuations
+in the price of oil, a foreign exchange rate, the level of the stock market, or some other
+variable. A **perfect hedge** is one that completely eliminates the risk.
+
+This chapter focuses on **hedge-and-forget** strategies. We assume that no attempt is made to adjust
+the hedge once it has been put in place. This chapter initially ignores daily settlement for futures.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 4. Interest rates
 

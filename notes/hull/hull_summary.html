@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yvan Richard">
-<meta name="dcterms.date" content="2026-08-27">
+<meta name="dcterms.date" content="2026-09-01">
 
 <title>Options, Futures, and Other Derivatives</title>
 <style>
@@ -92,6 +92,9 @@ div.csl-indent {
 <script src="hull_summary_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="hull_summary_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="hull_summary_files/libs/bootstrap/bootstrap-7e6083fab22102ff398964aedbb65fba.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="hull_summary_files/libs/quarto-diagram/mermaid.min.js"></script>
+<script src="hull_summary_files/libs/quarto-diagram/mermaid-init.js"></script>
+<link href="hull_summary_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -134,7 +137,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#foreword" id="toc-foreword" class="nav-link active" data-scroll-target="#foreword">Foreword</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link" data-scroll-target="#sec-intro">1. Introduction</a>
   <ul class="collapse">
   <li><a href="#exchange-traded-markets" id="toc-exchange-traded-markets" class="nav-link" data-scroll-target="#exchange-traded-markets">1.1. Exchange-traded markets</a></li>
   <li><a href="#over-the-counter-otc-markets" id="toc-over-the-counter-otc-markets" class="nav-link" data-scroll-target="#over-the-counter-otc-markets">1.2. Over-the-counter (OTC) markets</a>
@@ -152,9 +155,36 @@ window.Quarto = {
   <li><a href="#hedgers" id="toc-hedgers" class="nav-link" data-scroll-target="#hedgers">1.7. Hedgers</a>
   <ul class="collapse">
   <li><a href="#hedging-using-forward-contracts" id="toc-hedging-using-forward-contracts" class="nav-link" data-scroll-target="#hedging-using-forward-contracts">Hedging Using Forward Contracts</a></li>
+  <li><a href="#hedging-using-options" id="toc-hedging-using-options" class="nav-link" data-scroll-target="#hedging-using-options">Hedging Using Options</a></li>
   </ul></li>
+  <li><a href="#speculators" id="toc-speculators" class="nav-link" data-scroll-target="#speculators">1.8. Speculators</a>
+  <ul class="collapse">
+  <li><a href="#speculating-using-futures" id="toc-speculating-using-futures" class="nav-link" data-scroll-target="#speculating-using-futures">Speculating Using Futures</a></li>
+  <li><a href="#speculating-using-options" id="toc-speculating-using-options" class="nav-link" data-scroll-target="#speculating-using-options">Speculating Using Options</a></li>
   </ul></li>
-  <li><a href="#mechanics-of-futures-markets" id="toc-mechanics-of-futures-markets" class="nav-link" data-scroll-target="#mechanics-of-futures-markets">2. Mechanics of futures markets</a></li>
+  <li><a href="#aribtrageurs" id="toc-aribtrageurs" class="nav-link" data-scroll-target="#aribtrageurs">1.9. Aribtrageurs</a></li>
+  </ul></li>
+  <li><a href="#mechanics-of-futures-markets" id="toc-mechanics-of-futures-markets" class="nav-link" data-scroll-target="#mechanics-of-futures-markets">2. Mechanics of futures markets</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">2.1. Background</a>
+  <ul class="collapse">
+  <li><a href="#closing-out-positions" id="toc-closing-out-positions" class="nav-link" data-scroll-target="#closing-out-positions">Closing Out Positions</a></li>
+  </ul></li>
+  <li><a href="#specification-of-a-futures-contract" id="toc-specification-of-a-futures-contract" class="nav-link" data-scroll-target="#specification-of-a-futures-contract">2.2. Specification of a Futures Contract</a>
+  <ul class="collapse">
+  <li><a href="#the-asset" id="toc-the-asset" class="nav-link" data-scroll-target="#the-asset">The Asset</a></li>
+  <li><a href="#the-contract-size" id="toc-the-contract-size" class="nav-link" data-scroll-target="#the-contract-size">The Contract Size</a></li>
+  </ul></li>
+  <li><a href="#convergence-of-futures-prices-to-spot-prices" id="toc-convergence-of-futures-prices-to-spot-prices" class="nav-link" data-scroll-target="#convergence-of-futures-prices-to-spot-prices">2.3. Convergence of Futures Prices to Spot Prices</a></li>
+  <li><a href="#the-operation-of-margin-accounts" id="toc-the-operation-of-margin-accounts" class="nav-link" data-scroll-target="#the-operation-of-margin-accounts">2.4. The Operation of Margin Accounts</a>
+  <ul class="collapse">
+  <li><a href="#daily-settlement" id="toc-daily-settlement" class="nav-link" data-scroll-target="#daily-settlement">Daily Settlement</a></li>
+  <li><a href="#the-clearing-house-and-its-members" id="toc-the-clearing-house-and-its-members" class="nav-link" data-scroll-target="#the-clearing-house-and-its-members">The Clearing House and Its Members</a></li>
+  </ul></li>
+  <li><a href="#otc-markets" id="toc-otc-markets" class="nav-link" data-scroll-target="#otc-markets">2.5. OTC Markets</a></li>
+  <li><a href="#types-of-traders-and-types-of-order" id="toc-types-of-traders-and-types-of-order" class="nav-link" data-scroll-target="#types-of-traders-and-types-of-order">2.8. Types of Traders and Types of Order</a></li>
+  <li><a href="#forward-vs.-futures-contracts" id="toc-forward-vs.-futures-contracts" class="nav-link" data-scroll-target="#forward-vs.-futures-contracts">2.11. Forward vs.&nbsp;Futures Contracts</a></li>
+  </ul></li>
   <li><a href="#hedging-strategies-using-futures" id="toc-hedging-strategies-using-futures" class="nav-link" data-scroll-target="#hedging-strategies-using-futures">3. Hedging strategies using futures</a></li>
   <li><a href="#interest-rates" id="toc-interest-rates" class="nav-link" data-scroll-target="#interest-rates">4. Interest rates</a></li>
   <li><a href="#determination" id="toc-determination" class="nav-link" data-scroll-target="#determination">5. Determination</a></li>
@@ -189,7 +219,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 27, 2026</p>
+      <p class="date">September 1, 2026</p>
     </div>
   </div>
   
@@ -201,7 +231,7 @@ window.Quarto = {
 </header>
 
 
-<div id="ef303a6d" class="cell" data-execution_count="1">
+<div id="54c7124f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -214,7 +244,7 @@ window.Quarto = {
 <h1>Foreword</h1>
 <p>This is a non-exhaustive summary of selected chapters from <span class="citation" data-cites="hull2015">Hull (<a href="#ref-hull2015" role="doc-biblioref">2015</a>)</span>.</p>
 </section>
-<section id="introduction" class="level1 page-columns page-full">
+<section id="sec-intro" class="level1 page-columns page-full">
 <h1>1. Introduction</h1>
 <p><strong>Derivative.</strong> A <em>derivatvive</em> can be defined as a financial instrument whose value depends on (or derives from) the values of other, more basic, underlying variables. Very often the variables uderlying derivatives are the prices of traded assets.</p>
 <section id="exchange-traded-markets" class="level2">
@@ -237,7 +267,7 @@ window.Quarto = {
 <section id="sec-1-3" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-1-3">1.3. Forward contracts</h2>
 <p><strong>Forward contract.</strong> A <em>forward contract</em> is an agreement to buy or sell an asset at a certain future time for a certain price. It can be contrasted with a <em>spot</em> contracts which is an agreement to buy or sell immediately. A forward is typically traded in OTC markets. One party assumes a <strong>long position</strong> (i.e.&nbsp;agree to buy the asset at a defined time and price) and the counterparty assumes a <strong>short position</strong> (i.e. agree to sell for the agreed price at the agreed time). This type of contract can be useful to <strong>hedge against FX risk</strong>. For instance, a financial institution (FI) expects to disburse £1m in 6 months, so to protect themselves against FX risks, they purchase a forward (quote is number of USD per GDP).</p>
-<div id="f8d252de" class="cell" data-execution_count="2">
+<div id="ef892bcd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>forwards <span class="op">=</span> {</span>
@@ -285,7 +315,7 @@ S_T - K
 <p><span class="math display">\[
 K - S_T
 \]</span></p>
-<div id="ef0baf17" class="cell page-columns page-full" data-execution_count="3">
+<div id="a37eac91" class="cell page-columns page-full" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" data-cap-location="margin"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
@@ -361,10 +391,290 @@ K - S_T
 <h3 class="anchored" data-anchor-id="hedging-using-forward-contracts">Hedging Using Forward Contracts</h3>
 <p>See previous example in <a href="#sec-1-3" class="quarto-xref">Section&nbsp;2.3</a>. This example illustrates a key aspect of hedging. The purpose of hedging is to reduce risk. There is no guarantee that the outcome with hedging will be better than the outcome without hedging.</p>
 </section>
+<section id="hedging-using-options" class="level3">
+<h3 class="anchored" data-anchor-id="hedging-using-options">Hedging Using Options</h3>
+<p>Options can also be used for hedging. For instance, an investor may own stocks of company <span class="math inline">\(A\)</span>. If the investor predicts that the share’s price of <span class="math inline">\(A\)</span> will fall, he can either unload its positions or purchase a put option. An example is laid out below.</p>
+<p>An investor owns <strong>100 shares of XYZ</strong>, currently trading at <strong>$50 per share</strong>, and wants protection against a significant price decline. He may follow this strategy:</p>
+<p><strong>Hedging strategy:</strong> Buy one put-option contract with:</p>
+<ul>
+<li><strong>Strike price:</strong> $45</li>
+<li><strong>Expiration:</strong> Three months</li>
+<li><strong>Premium:</strong> $2 per share ($200 total)</li>
+<li><strong>Contract size:</strong> 100 shares</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">XYZ price at expiration</th>
+<th style="text-align: right;">Stock value</th>
+<th style="text-align: right;">Put value</th>
+<th style="text-align: right;">Combined value*</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">$60</td>
+<td style="text-align: right;">$6,000</td>
+<td style="text-align: right;">$0</td>
+<td style="text-align: right;">$5,800</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">$50</td>
+<td style="text-align: right;">$5,000</td>
+<td style="text-align: right;">$0</td>
+<td style="text-align: right;">$4,800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">$45</td>
+<td style="text-align: right;">$4,500</td>
+<td style="text-align: right;">$0</td>
+<td style="text-align: right;">$4,300</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">$35</td>
+<td style="text-align: right;">$3,500</td>
+<td style="text-align: right;">$1,000</td>
+<td style="text-align: right;">$4,300</td>
+</tr>
+</tbody>
+</table>
+<p>*Combined value includes the $200 option premium.</p>
+<p>The put creates an effective floor of <strong>$4,300</strong> after accounting for its premium. The investor retains the stock’s upside but pays <strong>$200</strong> for downside protection.</p>
+<p><strong>Fundamental Difference</strong></p>
+<p>The fundamental difference between a put and a forward contract is that the forward locks in a certain price, whereas the option contract provides an <em>insurance</em> against a movement in a particular direction.</p>
+</section>
+</section>
+<section id="speculators" class="level2">
+<h2 class="anchored" data-anchor-id="speculators">1.8. Speculators</h2>
+<section id="speculating-using-futures" class="level3">
+<h3 class="anchored" data-anchor-id="speculating-using-futures">Speculating Using Futures</h3>
+<p>Speculators place a <em>directional</em> bet; either they are betting that the price of the asset will go down or up. Derivatives are also useful to these agents. For instance, the advantage of futures (compared to directly purchasing the asset) is that a small amount of capital is required at the start of the strategy; a large speculative position can be taken by depositing a small outlay in a margin account.</p>
+</section>
+<section id="speculating-using-options" class="level3">
+<h3 class="anchored" data-anchor-id="speculating-using-options">Speculating Using Options</h3>
+<p>Let us consider the following scenario. The current price of stock <span class="math inline">\(A\)</span> is USD 20. The speculator estimates that in 3 months, the stock will be up and he can afford to invest USD 2,000 in his trading strategy. He has two choices (i) purchase the stock, (ii) buy a call option worth USD 1 with strike <span class="math inline">\(K = 22.50\)</span> (USD), and a maturity of three months. We compare these two strategies in two scenarios <span class="math inline">\(a\)</span> (at <span class="math inline">\(t = T\)</span>, <span class="math inline">\(A\)</span>’s price is 15), <span class="math inline">\(b\)</span> (at <span class="math inline">\(t = T\)</span>, <span class="math inline">\(A\)</span>’s price is 25).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th style="text-align: right;">Initial position</th>
+<th style="text-align: right;">Initial cost</th>
+<th style="text-align: right;">Scenario a: <span class="math inline">\(A_T = \$15\)</span></th>
+<th style="text-align: right;">Profit/Loss (a)</th>
+<th style="text-align: right;">Return (a)</th>
+<th style="text-align: right;">Scenario b: <span class="math inline">\(A_T = \$25\)</span></th>
+<th style="text-align: right;">Profit/Loss (b)</th>
+<th style="text-align: right;">Return (b)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Buy stock</td>
+<td style="text-align: right;">100 shares</td>
+<td style="text-align: right;">2,000</td>
+<td style="text-align: right;">1,500</td>
+<td style="text-align: right;">−500</td>
+<td style="text-align: right;">−25%</td>
+<td style="text-align: right;">2,500</td>
+<td style="text-align: right;">+500</td>
+<td style="text-align: right;">+25%</td>
+</tr>
+<tr class="even">
+<td>Buy calls (<span class="math inline">\(K = \$22.50\)</span>)</td>
+<td style="text-align: right;">2,000 calls*</td>
+<td style="text-align: right;">2,000</td>
+<td style="text-align: right;">$0</td>
+<td style="text-align: right;">−2,000</td>
+<td style="text-align: right;">−100%</td>
+<td style="text-align: right;">5,000</td>
+<td style="text-align: right;">+3,000</td>
+<td style="text-align: right;">+150%</td>
+</tr>
+</tbody>
+</table>
+<p>The value of the call position at maturity is:</p>
+<p><span class="math display">\[
+2{,}000 \times \max(A_T-K,0)
+\]</span></p>
+<ul>
+<li><strong>Scenario a:</strong> <span class="math inline">\(2{,}000 \times \max(15-22.50,0)=\$0\)</span></li>
+<li><strong>Scenario b:</strong> <span class="math inline">\(2{,}000 \times \max(25-22.50,0)=\$5{,}000\)</span></li>
+</ul>
+<p>*If one option contract represents 100 shares, the speculator purchases <strong>20 contracts</strong>, representing 2,000 underlying shares.</p>
+<p>As one can see, the second strategy has a significantly higher variance.</p>
+</section>
+</section>
+<section id="aribtrageurs" class="level2">
+<h2 class="anchored" data-anchor-id="aribtrageurs">1.9. Aribtrageurs</h2>
+<p>Arbitrageurs are a third important group of participants in futures, forward, and options markets. Arbitrage involves locking in a riskless profit by simultaneously entering into transactions in two or more markets.</p>
 </section>
 </section>
 <section id="mechanics-of-futures-markets" class="level1">
 <h1>2. Mechanics of futures markets</h1>
+<p>This chapter covers the details of how the futures markets work.</p>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">2.1. Background</h2>
+<p>One of the world’s leading futures exchanges is the Chicago Mercantile Exchange (CME) Group. Consider a corn futures contract traded on the exchange. On June 5, a trader in New York instructs a broker to buy one September corn futures contract, representing 5,000 bushels of corn. By taking this long position, the trader agrees to buy corn under the contract’s terms if the position is held through delivery.</p>
+<p>The trade requires a corresponding sell order. At approximately the same time, a trader in Kansas might instruct a broker to sell one September corn futures contract, thereby taking a short position. CME’s electronic trading system matches the compatible buy and sell orders at an agreed market price.</p>
+<p>After the trade is executed, the CME clearinghouse acts as the intermediary between the two parties, becoming the buyer to the seller and the seller to the buyer. Consequently, the traders do not need to know or assess each other directly. In practice, most futures positions are closed before delivery by entering into an offsetting trade.</p>
+<section id="closing-out-positions" class="level3">
+<h3 class="anchored" data-anchor-id="closing-out-positions">Closing Out Positions</h3>
+<p>The vast majority of futures contract do not lead to delivery. The reason is that most traders choose to close out their positions prior to the delivery period specified in the contract. Closing out a position means entering into the opposite trade to the original one. For instance, the New York trader who bought 1 future with a long position on June 5, could sell one on July 20. While the delivery almost never occurs, it still ties the futures price to the spot price.</p>
+</section>
+</section>
+<section id="specification-of-a-futures-contract" class="level2">
+<h2 class="anchored" data-anchor-id="specification-of-a-futures-contract">2.2. Specification of a Futures Contract</h2>
+<p>When developing a new contract, the exchange must specify in some detail the exact nature of the agreement between the two parties. In particular, it must specify the <strong>asset</strong>, the <strong>contract size</strong> (exactly how much of the asset will be delivered under one contract), <strong>where</strong> delivery can be made, and <strong>when</strong> delivery can be made.</p>
+<p>When the party with the short position is ready to deliver, it files a <em>notice of intention to deliver with the exchange</em>.</p>
+<section id="the-asset" class="level3">
+<h3 class="anchored" data-anchor-id="the-asset">The Asset</h3>
+<p>When the asset is a commodity, there may be quite a variation in the quality of what is available in the marketplace. When the asset is specified, it is therefore important that the exchange stipulate the grade or grades of the commodity that are acceptable (e.g.&nbsp;not all orange juices are equal!).</p>
+</section>
+<section id="the-contract-size" class="level3">
+<h3 class="anchored" data-anchor-id="the-contract-size">The Contract Size</h3>
+<p>The contract size specifies the amount of the asset that has to be delivered under one contract. This is an important decision for the exchange. If the contract size is too large, many investors who wish to hedge relatively small exposures or who wish to take relatively small speculative positions will be unable to use the exchange. On the other hand, if the contract size is too small, trading may be expensive as there is a cost associated with each contract traded.</p>
+</section>
+</section>
+<section id="convergence-of-futures-prices-to-spot-prices" class="level2">
+<h2 class="anchored" data-anchor-id="convergence-of-futures-prices-to-spot-prices">2.3. Convergence of Futures Prices to Spot Prices</h2>
+<p>As the delivery period for a futures contract is approached, the futures price converges to the spot price of the underlying asset. When the delivery period is reached, the futures price equals (or is very close to) the spot price. This result follows directly from the no-arbitrage condition. For instance, if the price of a futures <span class="math inline">\(F_T\)</span> at maturity <span class="math inline">\(T\)</span>, is much higher than the price <span class="math inline">\(S_{A, T}\)</span> of stock <span class="math inline">\(T\)</span>; the arbitrageur will (short) a future, buy the stock, and pocket the difference.</p>
+</section>
+<section id="the-operation-of-margin-accounts" class="level2">
+<h2 class="anchored" data-anchor-id="the-operation-of-margin-accounts">2.4. The Operation of Margin Accounts</h2>
+<p>If two investors get in touch with each other directly and agree to trade an asset in the future for a certain price, there are obvious risks. One of the investors may regret the deal and try to back out. Alternatively, the investor simply may not have the financial resources to honor the agreement. One of the key roles of the exchange is to organize trading so that contract defaults are avoided. This is where <strong>margin accounts</strong> come in.</p>
+<section id="daily-settlement" class="level3">
+<h3 class="anchored" data-anchor-id="daily-settlement">Daily Settlement</h3>
+<p>To illustrate how margin accounts work, we consider an investor who contacts his or her broker to buy two December gold futures contracts on the COMEX division of the New York Mercantile Exchange (NYMEX), which is part of the CME Group. We suppose that the current futures price is $1,450 per ounce. Because the contract size is 100 ounces, the investor has contracted to buy a total of 200 ounces at this price. The broker will require the investor to deposit funds in a margin account. The amount that must be deposited at the time the contract is entered into is known as the <strong>initial margin</strong>. We suppose this is $6,000 per contract, or $12,000 in total. At the end of each trading day, the margin account is adjusted to reflect the investor’s gain or loss. This practice is referred to as <em>daily settlement</em> or <em>marking to market</em>.</p>
+<p>The investor is entitled to withdraw any amount in the margin account that is in excess of the initial margin. However, a <em>maintenance margin</em> is set, i.e.&nbsp;a minimal threshold of liquidity in the margin account under which the account should not drop. If it does, the investor will receive a <strong>margin call</strong>. The investor is expected to top up the margin account to the initial margin level by the end of the next day. The extra funds deposited are known as a <em>variation margin</em>. If the investor does not provide the variation margin, the broker closes out the position.</p>
+</section>
+<section id="the-clearing-house-and-its-members" class="level3">
+<h3 class="anchored" data-anchor-id="the-clearing-house-and-its-members">The Clearing House and Its Members</h3>
+<p>A clearing house acts as an intermediary in futures transactions. It guarantees the performance of the parties to each transaction. The clearing house has a number of members. Brokers who are not members themselves must channel their business through a member and post margin with the member. The main task of the clearing house is to keep track of all the transactions that take place during a day, so that it can calculate the net position of each of its members.</p>
+<p>The clearing house member is required to provide initial margin (sometimes referred to as clearing margin) reflecting the total number of contracts that are being cleared. There is no maintenance margin applicable to the clearing house member. Each day the transactions being handled by the clearing house member are settled through the clearing house. If in total the transactions have lost money, the member is required to provide variation margin to the exchange clearing house; if there has been a gain on the transactions, the member receives variation margin from the clearing house.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+
+    A["Buyer A&lt;br/&gt;Wants to go LONG"]
+    B["Seller B&lt;br/&gt;Wants to go SHORT"]
+
+    BA["Broker A"]
+    BB["Broker B"]
+
+    EX["Futures Exchange&lt;br/&gt;Matches buy and sell orders"]
+
+    CH["Clearing House&lt;br/&gt;Central Counterparty"]
+
+    A --&gt;|"Buy order"| BA
+    B --&gt;|"Sell order"| BB
+
+    BA --&gt;|"Submit order"| EX
+    BB --&gt;|"Submit order"| EX
+
+    EX --&gt;|"Matched trade"| CH
+
+    CH --&gt;|"Short side of contract"| BA
+    CH --&gt;|"Long side of contract"| BB
+
+    BA --&gt;|"Long futures position"| A
+    BB --&gt;|"Short futures position"| B
+
+    A -.-&gt;|"Initial &amp; variation margin"| BA
+    B -.-&gt;|"Initial &amp; variation margin"| BB
+
+    BA -.-&gt;|"Margin / daily settlement"| CH
+    BB -.-&gt;|"Margin / daily settlement"| CH
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="otc-markets" class="level2">
+<h2 class="anchored" data-anchor-id="otc-markets">2.5. OTC Markets</h2>
+<p>Over-the-counter (OTC) markets, introduced in <a href="#sec-intro" class="quarto-xref">Section&nbsp;2</a>, are markets where companies agree to derivatives transactions without involving an exchange. Credit risk has traditionally been a feature of OTC derivatives markets.</p>
+<p>These credit risk might be mitigated with central counterparties (CCP), which work similarly in essence to a clearing house. If a derivative transaction in the OTC market does not use a CCP, it is a <em>bilateral</em> transaction. In this case, collaterals must be provided (similarly to the initial margin in a margin account). This agreement often includes an annex, referred to as the credit support annex or CSA</p>
+</section>
+<section id="types-of-traders-and-types-of-order" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-traders-and-types-of-order">2.8. Types of Traders and Types of Order</h2>
+<p>The <strong>bid</strong> is the highest price a buyer is willing to pay for a financial asset, while the <strong>ask</strong> is the lowest price a seller is willing to accept for it. The difference between the ask and bid prices is called the bid–ask spread. The different types of order are:</p>
+<ul>
+<li><strong>market order</strong>: It is a request that a trade be carried out immediately at the best price available in the market.</li>
+<li><strong>limit order</strong>: The order will be executed at a given price or one more favorable to the buyer.</li>
+<li><strong>stop order</strong>: The order also specifies a given price and the order is executed once a bid is made at that price (or lower).</li>
+<li><strong>stop-limit order</strong>: combination of the above.</li>
+</ul>
+</section>
+<section id="forward-vs.-futures-contracts" class="level2">
+<h2 class="anchored" data-anchor-id="forward-vs.-futures-contracts">2.11. Forward vs.&nbsp;Futures Contracts</h2>
+<div class="callout callout-style-default callout-important callout-titled" title="Interview Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Interview Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The difference between a forward contract and a futures contract is often asked in quant interviews. The table below summarizes the main differences.</p>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 58%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><em>Forward</em></th>
+<th><em>Futures</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Private contract between two parties</td>
+<td>Traded on an exchange</td>
+</tr>
+<tr class="even">
+<td>Not standardized</td>
+<td>Standardized contract</td>
+</tr>
+<tr class="odd">
+<td>Usually one specified delivery date</td>
+<td>Range of delivery dates</td>
+</tr>
+<tr class="even">
+<td>Settled at the end of contract</td>
+<td>Settled daily (marking to market)</td>
+</tr>
+<tr class="odd">
+<td>Delivery or final cash settlement usually takes place</td>
+<td>Contract is usually closed out prior to maturity</td>
+</tr>
+<tr class="even">
+<td>Some credit risk</td>
+<td>Virtually no credit risk (initial and maintenance margin)</td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="hedging-strategies-using-futures" class="level1">
 <h1>3. Hedging strategies using futures</h1>
@@ -891,7 +1201,7 @@ Hull, John C. 2015. <em>Options, Futures, and Other Derivatives</em>. 9th ed. Pe
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>This is a non-exhaustive summary of selected chapters from @hull2015.</span>
 <span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="fu"># 1. Introduction</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="fu"># 1. Introduction {#sec-intro}</span></span>
 <span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>**Derivative.** A *derivatvive* can be defined as a financial instrument whose value depends on (or derives from) the values of other,</span>
 <span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>more basic, underlying variables. Very often the variables uderlying derivatives are the prices of traded assets.</span>
@@ -1085,46 +1395,302 @@ Hull, John C. 2015. <em>Options, Futures, and Other Derivatives</em>. 9th ed. Pe
 <span id="cb5-235"><a href="#cb5-235" aria-hidden="true" tabindex="-1"></a>risk. There is no guarantee that the outcome with hedging will be better than the</span>
 <span id="cb5-236"><a href="#cb5-236" aria-hidden="true" tabindex="-1"></a>outcome without hedging.</span>
 <span id="cb5-237"><a href="#cb5-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-238"><a href="#cb5-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-238"><a href="#cb5-238" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hedging Using Options</span></span>
 <span id="cb5-239"><a href="#cb5-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-240"><a href="#cb5-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-241"><a href="#cb5-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-240"><a href="#cb5-240" aria-hidden="true" tabindex="-1"></a>Options can also be used for hedging. For instance, an investor may own stocks of company $A$.</span>
+<span id="cb5-241"><a href="#cb5-241" aria-hidden="true" tabindex="-1"></a>If the investor predicts that the share's price of $A$ will fall, he can either unload its positions or</span>
+<span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a>purchase a put option. An example is laid out below.</span>
 <span id="cb5-243"><a href="#cb5-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-244"><a href="#cb5-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-244"><a href="#cb5-244" aria-hidden="true" tabindex="-1"></a>An investor owns **100 shares of XYZ**, currently trading at **$50 per share**,</span>
+<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a>and wants protection against a significant price decline. He may follow this strategy:</span>
 <span id="cb5-246"><a href="#cb5-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-247"><a href="#cb5-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-247"><a href="#cb5-247" aria-hidden="true" tabindex="-1"></a>**Hedging strategy:** Buy one put-option contract with:</span>
 <span id="cb5-248"><a href="#cb5-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-249"><a href="#cb5-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-250"><a href="#cb5-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-251"><a href="#cb5-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-252"><a href="#cb5-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-249"><a href="#cb5-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Strike price:** $45</span>
+<span id="cb5-250"><a href="#cb5-250" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Expiration:** Three months</span>
+<span id="cb5-251"><a href="#cb5-251" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Premium:** $2 per share ($200 total)</span>
+<span id="cb5-252"><a href="#cb5-252" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Contract size:** 100 shares</span>
 <span id="cb5-253"><a href="#cb5-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-256"><a href="#cb5-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-257"><a href="#cb5-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-258"><a href="#cb5-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-259"><a href="#cb5-259" aria-hidden="true" tabindex="-1"></a><span class="fu"># 2. Mechanics of futures markets</span></span>
+<span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> XYZ price at expiration <span class="pp">|</span> Stock value <span class="pp">|</span> Put value <span class="pp">|</span> Combined value* <span class="pp">|</span></span>
+<span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a><span class="pp">|---:|---:|---:|---:|</span></span>
+<span id="cb5-256"><a href="#cb5-256" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $60 <span class="pp">|</span> $6,000 <span class="pp">|</span> $0 <span class="pp">|</span> $5,800 <span class="pp">|</span></span>
+<span id="cb5-257"><a href="#cb5-257" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $50 <span class="pp">|</span> $5,000 <span class="pp">|</span> $0 <span class="pp">|</span> $4,800 <span class="pp">|</span></span>
+<span id="cb5-258"><a href="#cb5-258" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $45 <span class="pp">|</span> $4,500 <span class="pp">|</span> $0 <span class="pp">|</span> $4,300 <span class="pp">|</span></span>
+<span id="cb5-259"><a href="#cb5-259" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $35 <span class="pp">|</span> $3,500 <span class="pp">|</span> $1,000 <span class="pp">|</span> $4,300 <span class="pp">|</span></span>
 <span id="cb5-260"><a href="#cb5-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-261"><a href="#cb5-261" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3. Hedging strategies using futures</span></span>
+<span id="cb5-261"><a href="#cb5-261" aria-hidden="true" tabindex="-1"></a><span class="sc">\*</span>Combined value includes the $200 option premium.</span>
 <span id="cb5-262"><a href="#cb5-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-263"><a href="#cb5-263" aria-hidden="true" tabindex="-1"></a><span class="fu"># 4. Interest rates</span></span>
+<span id="cb5-263"><a href="#cb5-263" aria-hidden="true" tabindex="-1"></a>The put creates an effective floor of **$4,300** after accounting for its premium. The investor retains the stock's upside but pays **$200** for downside protection.</span>
 <span id="cb5-264"><a href="#cb5-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-265"><a href="#cb5-265" aria-hidden="true" tabindex="-1"></a><span class="fu"># 5. Determination</span></span>
+<span id="cb5-265"><a href="#cb5-265" aria-hidden="true" tabindex="-1"></a>**Fundamental Difference**</span>
 <span id="cb5-266"><a href="#cb5-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-267"><a href="#cb5-267" aria-hidden="true" tabindex="-1"></a><span class="fu"># 6. Interest rate futures</span></span>
-<span id="cb5-268"><a href="#cb5-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-269"><a href="#cb5-269" aria-hidden="true" tabindex="-1"></a><span class="fu"># 10. Mechanics of option markets</span></span>
-<span id="cb5-270"><a href="#cb5-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-271"><a href="#cb5-271" aria-hidden="true" tabindex="-1"></a><span class="fu"># 11. Properties of stock options</span></span>
-<span id="cb5-272"><a href="#cb5-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-273"><a href="#cb5-273" aria-hidden="true" tabindex="-1"></a><span class="fu"># 18. Futures options</span></span>
-<span id="cb5-274"><a href="#cb5-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-275"><a href="#cb5-275" aria-hidden="true" tabindex="-1"></a><span class="fu"># 19. The Greek letters</span></span>
-<span id="cb5-276"><a href="#cb5-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-277"><a href="#cb5-277" aria-hidden="true" tabindex="-1"></a><span class="fu"># 20. Volatility smiles</span></span>
+<span id="cb5-267"><a href="#cb5-267" aria-hidden="true" tabindex="-1"></a>The fundamental difference between a put and a forward contract is that the forward locks in a certain price, whereas the option contract provides an *insurance* against</span>
+<span id="cb5-268"><a href="#cb5-268" aria-hidden="true" tabindex="-1"></a>a movement in a particular direction.</span>
+<span id="cb5-269"><a href="#cb5-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-270"><a href="#cb5-270" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1.8. Speculators</span></span>
+<span id="cb5-271"><a href="#cb5-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-272"><a href="#cb5-272" aria-hidden="true" tabindex="-1"></a><span class="fu">### Speculating Using Futures</span></span>
+<span id="cb5-273"><a href="#cb5-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-274"><a href="#cb5-274" aria-hidden="true" tabindex="-1"></a>Speculators place a *directional* bet; either they are betting that the price of the asset will go down or up.</span>
+<span id="cb5-275"><a href="#cb5-275" aria-hidden="true" tabindex="-1"></a>Derivatives are also useful to these agents. For instance, the advantage of futures (compared to directly purchasing the asset) is that</span>
+<span id="cb5-276"><a href="#cb5-276" aria-hidden="true" tabindex="-1"></a>a small amount of capital is required at the start of the strategy; a large speculative position can be taken by depositing a small outlay in a margin account.</span>
+<span id="cb5-277"><a href="#cb5-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-278"><a href="#cb5-278" aria-hidden="true" tabindex="-1"></a><span class="fu">### Speculating Using Options</span></span>
+<span id="cb5-279"><a href="#cb5-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-280"><a href="#cb5-280" aria-hidden="true" tabindex="-1"></a>Let us consider the following scenario. The current price of stock $A$ is USD 20. The speculator estimates that in 3 months, the stock will be up and</span>
+<span id="cb5-281"><a href="#cb5-281" aria-hidden="true" tabindex="-1"></a>he can afford to invest USD 2,000 in his trading strategy. He has two choices (i) purchase the stock, (ii) buy a call option worth USD 1 with strike $K = 22.50$ (USD), and a maturity</span>
+<span id="cb5-282"><a href="#cb5-282" aria-hidden="true" tabindex="-1"></a>of three months. We compare these two strategies in two scenarios $a$ (at $t = T$, $A$'s price is 15), $b$ (at $t = T$, $A$'s price is 25).</span>
+<span id="cb5-283"><a href="#cb5-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-284"><a href="#cb5-284" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Strategy <span class="pp">|</span> Initial position <span class="pp">|</span> Initial cost <span class="pp">|</span> Scenario a: $A_T = \$15$ <span class="pp">|</span> Profit/Loss (a) <span class="pp">|</span> Return (a) <span class="pp">|</span> Scenario b: $A_T = \$25$ <span class="pp">|</span> Profit/Loss (b) <span class="pp">|</span> Return (b) <span class="pp">|</span></span>
+<span id="cb5-285"><a href="#cb5-285" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---:|---:|---:|---:|---:|---:|---:|---:|</span></span>
+<span id="cb5-286"><a href="#cb5-286" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Buy stock <span class="pp">|</span> 100 shares <span class="pp">|</span> 2,000 <span class="pp">|</span> 1,500 <span class="pp">|</span> −500 <span class="pp">|</span> −25% <span class="pp">|</span> 2,500 <span class="pp">|</span> +500 <span class="pp">|</span> +25% <span class="pp">|</span></span>
+<span id="cb5-287"><a href="#cb5-287" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Buy calls ($K = \$22.50$) <span class="pp">|</span> 2,000 calls* <span class="pp">|</span> 2,000 <span class="pp">|</span> $0 <span class="pp">|</span> −2,000 <span class="pp">|</span> −100% <span class="pp">|</span> 5,000 <span class="pp">|</span> +3,000 <span class="pp">|</span> +150% <span class="pp">|</span></span>
+<span id="cb5-288"><a href="#cb5-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-289"><a href="#cb5-289" aria-hidden="true" tabindex="-1"></a>The value of the call position at maturity is:</span>
+<span id="cb5-290"><a href="#cb5-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-291"><a href="#cb5-291" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb5-292"><a href="#cb5-292" aria-hidden="true" tabindex="-1"></a>2{,}000 \times \max(A_T-K,0)</span>
+<span id="cb5-293"><a href="#cb5-293" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb5-294"><a href="#cb5-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-295"><a href="#cb5-295" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Scenario a:** $2{,}000 \times \max(15-22.50,0)=\$0$</span>
+<span id="cb5-296"><a href="#cb5-296" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Scenario b:** $2{,}000 \times \max(25-22.50,0)=\$5{,}000$</span>
+<span id="cb5-297"><a href="#cb5-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-298"><a href="#cb5-298" aria-hidden="true" tabindex="-1"></a><span class="sc">\*</span>If one option contract represents 100 shares, the speculator purchases **20 contracts**, representing 2,000 underlying shares.</span>
+<span id="cb5-299"><a href="#cb5-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-300"><a href="#cb5-300" aria-hidden="true" tabindex="-1"></a>As one can see, the second strategy has a significantly higher variance.</span>
+<span id="cb5-301"><a href="#cb5-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-302"><a href="#cb5-302" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1.9. Aribtrageurs</span></span>
+<span id="cb5-303"><a href="#cb5-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-304"><a href="#cb5-304" aria-hidden="true" tabindex="-1"></a>Arbitrageurs are a third important group of participants in futures, forward, and</span>
+<span id="cb5-305"><a href="#cb5-305" aria-hidden="true" tabindex="-1"></a>options markets. Arbitrage involves locking in a riskless profit by simultaneously</span>
+<span id="cb5-306"><a href="#cb5-306" aria-hidden="true" tabindex="-1"></a>entering into transactions in two or more markets.</span>
+<span id="cb5-307"><a href="#cb5-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-308"><a href="#cb5-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-309"><a href="#cb5-309" aria-hidden="true" tabindex="-1"></a><span class="fu"># 2. Mechanics of futures markets</span></span>
+<span id="cb5-310"><a href="#cb5-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-311"><a href="#cb5-311" aria-hidden="true" tabindex="-1"></a>This chapter covers the details of how the futures markets work.</span>
+<span id="cb5-312"><a href="#cb5-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-313"><a href="#cb5-313" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.1. Background</span></span>
+<span id="cb5-314"><a href="#cb5-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-315"><a href="#cb5-315" aria-hidden="true" tabindex="-1"></a>One of the world’s leading futures exchanges is the Chicago Mercantile Exchange (CME) Group. Consider a corn futures contract traded on the exchange. On June 5, a trader in New York instructs a broker to buy one September corn futures contract, representing 5,000 bushels of corn. By taking this long position, the trader agrees to buy corn under the contract’s terms if the position is held through delivery.</span>
+<span id="cb5-316"><a href="#cb5-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-317"><a href="#cb5-317" aria-hidden="true" tabindex="-1"></a>The trade requires a corresponding sell order. At approximately the same time, a trader in Kansas might instruct a broker to sell one September corn futures contract, thereby taking a short position. CME’s electronic trading system matches the compatible buy and sell orders at an agreed market price.</span>
+<span id="cb5-318"><a href="#cb5-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-319"><a href="#cb5-319" aria-hidden="true" tabindex="-1"></a>After the trade is executed, the CME clearinghouse acts as the intermediary between the two parties, becoming the buyer to the seller and the seller to the buyer. Consequently, the traders do not need to know or assess each other directly. In practice, most futures positions are closed before delivery by entering into an offsetting trade.</span>
+<span id="cb5-320"><a href="#cb5-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-321"><a href="#cb5-321" aria-hidden="true" tabindex="-1"></a><span class="fu">### Closing Out Positions</span></span>
+<span id="cb5-322"><a href="#cb5-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-323"><a href="#cb5-323" aria-hidden="true" tabindex="-1"></a>The vast majority of futures contract do not lead to delivery. The reason is that most traders choose to close out</span>
+<span id="cb5-324"><a href="#cb5-324" aria-hidden="true" tabindex="-1"></a>their positions prior to the delivery period specified in the contract. Closing out a position means entering into the opposite trade</span>
+<span id="cb5-325"><a href="#cb5-325" aria-hidden="true" tabindex="-1"></a>to the original one. For instance, the New York trader who bought 1 future with a long position on June 5, could sell one on July 20. </span>
+<span id="cb5-326"><a href="#cb5-326" aria-hidden="true" tabindex="-1"></a>While the delivery almost never occurs, it still ties the futures price to the spot price.</span>
+<span id="cb5-327"><a href="#cb5-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-328"><a href="#cb5-328" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.2. Specification of a Futures Contract</span></span>
+<span id="cb5-329"><a href="#cb5-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-330"><a href="#cb5-330" aria-hidden="true" tabindex="-1"></a>When developing a new contract, the exchange must specify in some detail the exact</span>
+<span id="cb5-331"><a href="#cb5-331" aria-hidden="true" tabindex="-1"></a>nature of the agreement between the two parties. In particular, it must specify the **asset**,</span>
+<span id="cb5-332"><a href="#cb5-332" aria-hidden="true" tabindex="-1"></a>the **contract size** (exactly how much of the asset will be delivered under one contract),</span>
+<span id="cb5-333"><a href="#cb5-333" aria-hidden="true" tabindex="-1"></a>**where** delivery can be made, and **when** delivery can be made.</span>
+<span id="cb5-334"><a href="#cb5-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-335"><a href="#cb5-335" aria-hidden="true" tabindex="-1"></a>When the party with the short position is ready to</span>
+<span id="cb5-336"><a href="#cb5-336" aria-hidden="true" tabindex="-1"></a>deliver, it files a *notice of intention to deliver with the exchange*.</span>
+<span id="cb5-337"><a href="#cb5-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-338"><a href="#cb5-338" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Asset</span></span>
+<span id="cb5-339"><a href="#cb5-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-340"><a href="#cb5-340" aria-hidden="true" tabindex="-1"></a>When the asset is a commodity, there may be quite a variation in the quality of what is</span>
+<span id="cb5-341"><a href="#cb5-341" aria-hidden="true" tabindex="-1"></a>available in the marketplace. When the asset is specified, it is therefore important that the</span>
+<span id="cb5-342"><a href="#cb5-342" aria-hidden="true" tabindex="-1"></a>exchange stipulate the grade or grades of the commodity that are acceptable (e.g. not all orange juices are equal!).</span>
+<span id="cb5-343"><a href="#cb5-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-344"><a href="#cb5-344" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Contract Size</span></span>
+<span id="cb5-345"><a href="#cb5-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-346"><a href="#cb5-346" aria-hidden="true" tabindex="-1"></a>The contract size specifies the amount of the asset that has to be delivered under one</span>
+<span id="cb5-347"><a href="#cb5-347" aria-hidden="true" tabindex="-1"></a>contract. This is an important decision for the exchange. If the contract size is too large,</span>
+<span id="cb5-348"><a href="#cb5-348" aria-hidden="true" tabindex="-1"></a>many investors who wish to hedge relatively small exposures or who wish to take</span>
+<span id="cb5-349"><a href="#cb5-349" aria-hidden="true" tabindex="-1"></a>relatively small speculative positions will be unable to use the exchange. On the other</span>
+<span id="cb5-350"><a href="#cb5-350" aria-hidden="true" tabindex="-1"></a>hand, if the contract size is too small, trading may be expensive as there is a cost</span>
+<span id="cb5-351"><a href="#cb5-351" aria-hidden="true" tabindex="-1"></a>associated with each contract traded.</span>
+<span id="cb5-352"><a href="#cb5-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-353"><a href="#cb5-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-354"><a href="#cb5-354" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.3. Convergence of Futures Prices to Spot Prices</span></span>
+<span id="cb5-355"><a href="#cb5-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-356"><a href="#cb5-356" aria-hidden="true" tabindex="-1"></a>As the delivery period for a futures contract is approached, the futures price converges</span>
+<span id="cb5-357"><a href="#cb5-357" aria-hidden="true" tabindex="-1"></a>to the spot price of the underlying asset. When the delivery period is reached, the</span>
+<span id="cb5-358"><a href="#cb5-358" aria-hidden="true" tabindex="-1"></a>futures price equals (or is very close to) the spot price. This result follows directly from the no-arbitrage condition.</span>
+<span id="cb5-359"><a href="#cb5-359" aria-hidden="true" tabindex="-1"></a>For instance, if the price of a futures $F_T$ at maturity $T$, is much higher than the price $S_{A, T}$ of stock $T$; the arbitrageur</span>
+<span id="cb5-360"><a href="#cb5-360" aria-hidden="true" tabindex="-1"></a>will (short) a future, buy the stock, and pocket the difference.</span>
+<span id="cb5-361"><a href="#cb5-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-362"><a href="#cb5-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.4. The Operation of Margin Accounts</span></span>
+<span id="cb5-363"><a href="#cb5-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-364"><a href="#cb5-364" aria-hidden="true" tabindex="-1"></a>If two investors get in touch with each other directly and agree to trade an asset in the</span>
+<span id="cb5-365"><a href="#cb5-365" aria-hidden="true" tabindex="-1"></a>future for a certain price, there are obvious risks. One of the investors may regret the</span>
+<span id="cb5-366"><a href="#cb5-366" aria-hidden="true" tabindex="-1"></a>deal and try to back out. Alternatively, the investor simply may not have the financial</span>
+<span id="cb5-367"><a href="#cb5-367" aria-hidden="true" tabindex="-1"></a>resources to honor the agreement. One of the key roles of the exchange is to organize</span>
+<span id="cb5-368"><a href="#cb5-368" aria-hidden="true" tabindex="-1"></a>trading so that contract defaults are avoided. This is where **margin accounts** come in.</span>
+<span id="cb5-369"><a href="#cb5-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-370"><a href="#cb5-370" aria-hidden="true" tabindex="-1"></a><span class="fu">### Daily Settlement</span></span>
+<span id="cb5-371"><a href="#cb5-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-372"><a href="#cb5-372" aria-hidden="true" tabindex="-1"></a>To illustrate how margin accounts work, we consider an investor who contacts his or</span>
+<span id="cb5-373"><a href="#cb5-373" aria-hidden="true" tabindex="-1"></a>her broker to buy two December gold futures contracts on the COMEX division of the</span>
+<span id="cb5-374"><a href="#cb5-374" aria-hidden="true" tabindex="-1"></a>New York Mercantile Exchange (NYMEX), which is part of the CME Group. We</span>
+<span id="cb5-375"><a href="#cb5-375" aria-hidden="true" tabindex="-1"></a>suppose that the current futures price is $1,450 per ounce. Because the contract size is</span>
+<span id="cb5-376"><a href="#cb5-376" aria-hidden="true" tabindex="-1"></a>100 ounces, the investor has contracted to buy a total of 200 ounces at this price. The</span>
+<span id="cb5-377"><a href="#cb5-377" aria-hidden="true" tabindex="-1"></a>broker will require the investor to deposit funds in a margin account. The amount that</span>
+<span id="cb5-378"><a href="#cb5-378" aria-hidden="true" tabindex="-1"></a>must be deposited at the time the contract is entered into is known as the **initial margin**.</span>
+<span id="cb5-379"><a href="#cb5-379" aria-hidden="true" tabindex="-1"></a>We suppose this is $6,000 per contract, or $12,000 in total. At the end of each trading</span>
+<span id="cb5-380"><a href="#cb5-380" aria-hidden="true" tabindex="-1"></a>day, the margin account is adjusted to reflect the investor’s gain or loss. This practice is</span>
+<span id="cb5-381"><a href="#cb5-381" aria-hidden="true" tabindex="-1"></a>referred to as *daily settlement* or *marking to market*.</span>
+<span id="cb5-382"><a href="#cb5-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-383"><a href="#cb5-383" aria-hidden="true" tabindex="-1"></a>The investor is entitled to withdraw any amount in the margin account that is in excess of the initial margin.</span>
+<span id="cb5-384"><a href="#cb5-384" aria-hidden="true" tabindex="-1"></a>However, a *maintenance margin* is set, i.e. a minimal threshold of liquidity in the margin account under which the account should</span>
+<span id="cb5-385"><a href="#cb5-385" aria-hidden="true" tabindex="-1"></a>not drop. If it does, the investor will receive a **margin call**. The investor is expected to top up the margin account to the initial margin</span>
+<span id="cb5-386"><a href="#cb5-386" aria-hidden="true" tabindex="-1"></a>level by the end of the next day. The extra funds deposited are known as a *variation</span>
+<span id="cb5-387"><a href="#cb5-387" aria-hidden="true" tabindex="-1"></a>margin*. If the investor does not provide the variation margin, the broker closes out the</span>
+<span id="cb5-388"><a href="#cb5-388" aria-hidden="true" tabindex="-1"></a>position.</span>
+<span id="cb5-389"><a href="#cb5-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-390"><a href="#cb5-390" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Clearing House and Its Members</span></span>
+<span id="cb5-391"><a href="#cb5-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-392"><a href="#cb5-392" aria-hidden="true" tabindex="-1"></a>A clearing house acts as an intermediary in futures transactions. It guarantees the</span>
+<span id="cb5-393"><a href="#cb5-393" aria-hidden="true" tabindex="-1"></a>performance of the parties to each transaction. The clearing house has a number of</span>
+<span id="cb5-394"><a href="#cb5-394" aria-hidden="true" tabindex="-1"></a>members. Brokers who are not members themselves must channel their business</span>
+<span id="cb5-395"><a href="#cb5-395" aria-hidden="true" tabindex="-1"></a>through a member and post margin with the member. The main task of the clearing</span>
+<span id="cb5-396"><a href="#cb5-396" aria-hidden="true" tabindex="-1"></a>house is to keep track of all the transactions that take place during a day, so that it can</span>
+<span id="cb5-397"><a href="#cb5-397" aria-hidden="true" tabindex="-1"></a>calculate the net position of each of its members.</span>
+<span id="cb5-398"><a href="#cb5-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-399"><a href="#cb5-399" aria-hidden="true" tabindex="-1"></a>The clearing house member is required to provide initial margin (sometimes referred to</span>
+<span id="cb5-400"><a href="#cb5-400" aria-hidden="true" tabindex="-1"></a>as clearing margin) reflecting the total number of contracts that are being cleared. There</span>
+<span id="cb5-401"><a href="#cb5-401" aria-hidden="true" tabindex="-1"></a>is no maintenance margin applicable to the clearing house member. Each day the</span>
+<span id="cb5-402"><a href="#cb5-402" aria-hidden="true" tabindex="-1"></a>transactions being handled by the clearing house member are settled through the clearing</span>
+<span id="cb5-403"><a href="#cb5-403" aria-hidden="true" tabindex="-1"></a>house. If in total the transactions have lost money, the member is required to provide</span>
+<span id="cb5-404"><a href="#cb5-404" aria-hidden="true" tabindex="-1"></a>variation margin to the exchange clearing house; if there has been a gain on the</span>
+<span id="cb5-405"><a href="#cb5-405" aria-hidden="true" tabindex="-1"></a>transactions, the member receives variation margin from the clearing house.</span>
+<span id="cb5-406"><a href="#cb5-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-407"><a href="#cb5-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-410"><a href="#cb5-410" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-411"><a href="#cb5-411" aria-hidden="true" tabindex="-1"></a>flowchart TB</span>
+<span id="cb5-412"><a href="#cb5-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-413"><a href="#cb5-413" aria-hidden="true" tabindex="-1"></a>    A[<span class="ot">"</span><span class="st">Buyer A&lt;br/&gt;Wants to go LONG</span><span class="ot">"</span>]</span>
+<span id="cb5-414"><a href="#cb5-414" aria-hidden="true" tabindex="-1"></a>    B[<span class="ot">"</span><span class="st">Seller B&lt;br/&gt;Wants to go SHORT</span><span class="ot">"</span>]</span>
+<span id="cb5-415"><a href="#cb5-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-416"><a href="#cb5-416" aria-hidden="true" tabindex="-1"></a>    BA[<span class="ot">"</span><span class="st">Broker A</span><span class="ot">"</span>]</span>
+<span id="cb5-417"><a href="#cb5-417" aria-hidden="true" tabindex="-1"></a>    BB[<span class="ot">"</span><span class="st">Broker B</span><span class="ot">"</span>]</span>
+<span id="cb5-418"><a href="#cb5-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-419"><a href="#cb5-419" aria-hidden="true" tabindex="-1"></a>    EX[<span class="ot">"</span><span class="st">Futures Exchange&lt;br/&gt;Matches buy and sell orders</span><span class="ot">"</span>]</span>
+<span id="cb5-420"><a href="#cb5-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-421"><a href="#cb5-421" aria-hidden="true" tabindex="-1"></a>    CH[<span class="ot">"</span><span class="st">Clearing House&lt;br/&gt;Central Counterparty</span><span class="ot">"</span>]</span>
+<span id="cb5-422"><a href="#cb5-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-423"><a href="#cb5-423" aria-hidden="true" tabindex="-1"></a>    A --&gt;|<span class="ot">"</span><span class="st">Buy order</span><span class="ot">"</span>| BA</span>
+<span id="cb5-424"><a href="#cb5-424" aria-hidden="true" tabindex="-1"></a>    B --&gt;|<span class="ot">"</span><span class="st">Sell order</span><span class="ot">"</span>| BB</span>
+<span id="cb5-425"><a href="#cb5-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-426"><a href="#cb5-426" aria-hidden="true" tabindex="-1"></a>    BA --&gt;|<span class="ot">"</span><span class="st">Submit order</span><span class="ot">"</span>| EX</span>
+<span id="cb5-427"><a href="#cb5-427" aria-hidden="true" tabindex="-1"></a>    BB --&gt;|<span class="ot">"</span><span class="st">Submit order</span><span class="ot">"</span>| EX</span>
+<span id="cb5-428"><a href="#cb5-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-429"><a href="#cb5-429" aria-hidden="true" tabindex="-1"></a>    EX --&gt;|<span class="ot">"</span><span class="st">Matched trade</span><span class="ot">"</span>| CH</span>
+<span id="cb5-430"><a href="#cb5-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-431"><a href="#cb5-431" aria-hidden="true" tabindex="-1"></a>    CH --&gt;|<span class="ot">"</span><span class="st">Short side of contract</span><span class="ot">"</span>| BA</span>
+<span id="cb5-432"><a href="#cb5-432" aria-hidden="true" tabindex="-1"></a>    CH --&gt;|<span class="ot">"</span><span class="st">Long side of contract</span><span class="ot">"</span>| BB</span>
+<span id="cb5-433"><a href="#cb5-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-434"><a href="#cb5-434" aria-hidden="true" tabindex="-1"></a>    BA --&gt;|<span class="ot">"</span><span class="st">Long futures position</span><span class="ot">"</span>| A</span>
+<span id="cb5-435"><a href="#cb5-435" aria-hidden="true" tabindex="-1"></a>    BB --&gt;|<span class="ot">"</span><span class="st">Short futures position</span><span class="ot">"</span>| B</span>
+<span id="cb5-436"><a href="#cb5-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-437"><a href="#cb5-437" aria-hidden="true" tabindex="-1"></a>    A -.-&gt;|<span class="ot">"</span><span class="st">Initial &amp; variation margin</span><span class="ot">"</span>| BA</span>
+<span id="cb5-438"><a href="#cb5-438" aria-hidden="true" tabindex="-1"></a>    B -.-&gt;|<span class="ot">"</span><span class="st">Initial &amp; variation margin</span><span class="ot">"</span>| BB</span>
+<span id="cb5-439"><a href="#cb5-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-440"><a href="#cb5-440" aria-hidden="true" tabindex="-1"></a>    BA -.-&gt;|<span class="ot">"</span><span class="st">Margin / daily settlement</span><span class="ot">"</span>| CH</span>
+<span id="cb5-441"><a href="#cb5-441" aria-hidden="true" tabindex="-1"></a>    BB -.-&gt;|<span class="ot">"</span><span class="st">Margin / daily settlement</span><span class="ot">"</span>| CH</span>
+<span id="cb5-442"><a href="#cb5-442" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-443"><a href="#cb5-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-444"><a href="#cb5-444" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.5. OTC Markets</span></span>
+<span id="cb5-445"><a href="#cb5-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-446"><a href="#cb5-446" aria-hidden="true" tabindex="-1"></a>Over-the-counter (OTC) markets, introduced in @sec-intro, are markets where companies</span>
+<span id="cb5-447"><a href="#cb5-447" aria-hidden="true" tabindex="-1"></a>agree to derivatives transactions without involving an exchange. Credit risk has traditionally been a feature of OTC derivatives markets.</span>
+<span id="cb5-448"><a href="#cb5-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-449"><a href="#cb5-449" aria-hidden="true" tabindex="-1"></a>These credit risk might be mitigated with central counterparties (CCP), which work similarly in essence to a clearing house.</span>
+<span id="cb5-450"><a href="#cb5-450" aria-hidden="true" tabindex="-1"></a>If a derivative transaction in the OTC market does not use a CCP, it is a *bilateral* transaction. In this case, collaterals must be provided</span>
+<span id="cb5-451"><a href="#cb5-451" aria-hidden="true" tabindex="-1"></a>(similarly to the initial margin in a margin account). This agreement often includes an annex, referred to</span>
+<span id="cb5-452"><a href="#cb5-452" aria-hidden="true" tabindex="-1"></a>as the credit support annex or CSA</span>
+<span id="cb5-453"><a href="#cb5-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-454"><a href="#cb5-454" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.8. Types of Traders and Types of Order</span></span>
+<span id="cb5-455"><a href="#cb5-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-456"><a href="#cb5-456" aria-hidden="true" tabindex="-1"></a>The **bid** is the highest price a buyer is willing to pay for a financial asset, while the **ask** is the lowest price a seller is willing to accept for it.</span>
+<span id="cb5-457"><a href="#cb5-457" aria-hidden="true" tabindex="-1"></a>The difference between the ask and bid prices is called the bid–ask spread. The different types of order are:</span>
+<span id="cb5-458"><a href="#cb5-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-459"><a href="#cb5-459" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>**market order**: It is a request that a trade be carried out immediately at the best price available in the market.</span>
+<span id="cb5-460"><a href="#cb5-460" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>**limit order**: The order will be executed at a given price or one more favorable to the buyer.</span>
+<span id="cb5-461"><a href="#cb5-461" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>**stop order**: The order also specifies a given price and the order is executed once a bid is made at that price (or lower).</span>
+<span id="cb5-462"><a href="#cb5-462" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>**stop-limit order**: combination of the above.</span>
+<span id="cb5-463"><a href="#cb5-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-464"><a href="#cb5-464" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.11. Forward vs. Futures Contracts</span></span>
+<span id="cb5-465"><a href="#cb5-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-466"><a href="#cb5-466" aria-hidden="true" tabindex="-1"></a>::: {.callout-important title="Interview Question"}</span>
+<span id="cb5-467"><a href="#cb5-467" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb5-468"><a href="#cb5-468" aria-hidden="true" tabindex="-1"></a>The difference between a forward contract and a futures contract is often asked in quant interviews.</span>
+<span id="cb5-469"><a href="#cb5-469" aria-hidden="true" tabindex="-1"></a>The table below summarizes the main differences.</span>
+<span id="cb5-470"><a href="#cb5-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-471"><a href="#cb5-471" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-472"><a href="#cb5-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-473"><a href="#cb5-473" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> *Forward*                           | *Futures*                <span class="pp">|</span></span>
+<span id="cb5-474"><a href="#cb5-474" aria-hidden="true" tabindex="-1"></a><span class="pp">|-------------------------------------|--------------------------|</span></span>
+<span id="cb5-475"><a href="#cb5-475" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>Private contract between two parties <span class="pp">|</span> Traded on an exchange    <span class="pp">|</span></span>
+<span id="cb5-476"><a href="#cb5-476" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Not standardized <span class="pp">|</span> Standardized contract <span class="pp">|</span></span>
+<span id="cb5-477"><a href="#cb5-477" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Usually one specified delivery date <span class="pp">|</span> Range of delivery dates <span class="pp">|</span></span>
+<span id="cb5-478"><a href="#cb5-478" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>Settled at the end of contract <span class="pp">|</span> Settled daily (marking to market) <span class="pp">|</span></span>
+<span id="cb5-479"><a href="#cb5-479" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Delivery or final cash settlement usually takes place <span class="pp">|</span> Contract is usually closed out prior to maturity <span class="pp">|</span></span>
+<span id="cb5-480"><a href="#cb5-480" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Some credit risk <span class="pp">|</span> Virtually no credit risk (initial and maintenance margin) <span class="pp">|</span></span>
+<span id="cb5-481"><a href="#cb5-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-482"><a href="#cb5-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-483"><a href="#cb5-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-484"><a href="#cb5-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-485"><a href="#cb5-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-486"><a href="#cb5-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-487"><a href="#cb5-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-488"><a href="#cb5-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-489"><a href="#cb5-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-490"><a href="#cb5-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-491"><a href="#cb5-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-492"><a href="#cb5-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-493"><a href="#cb5-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-494"><a href="#cb5-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-495"><a href="#cb5-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-496"><a href="#cb5-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-497"><a href="#cb5-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-498"><a href="#cb5-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-499"><a href="#cb5-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-500"><a href="#cb5-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-501"><a href="#cb5-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-502"><a href="#cb5-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-503"><a href="#cb5-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-504"><a href="#cb5-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-505"><a href="#cb5-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-506"><a href="#cb5-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-507"><a href="#cb5-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-508"><a href="#cb5-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-509"><a href="#cb5-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-510"><a href="#cb5-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-511"><a href="#cb5-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-512"><a href="#cb5-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-513"><a href="#cb5-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-514"><a href="#cb5-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-515"><a href="#cb5-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-516"><a href="#cb5-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-517"><a href="#cb5-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-518"><a href="#cb5-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-519"><a href="#cb5-519" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3. Hedging strategies using futures</span></span>
+<span id="cb5-520"><a href="#cb5-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-521"><a href="#cb5-521" aria-hidden="true" tabindex="-1"></a><span class="fu"># 4. Interest rates</span></span>
+<span id="cb5-522"><a href="#cb5-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-523"><a href="#cb5-523" aria-hidden="true" tabindex="-1"></a><span class="fu"># 5. Determination</span></span>
+<span id="cb5-524"><a href="#cb5-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-525"><a href="#cb5-525" aria-hidden="true" tabindex="-1"></a><span class="fu"># 6. Interest rate futures</span></span>
+<span id="cb5-526"><a href="#cb5-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-527"><a href="#cb5-527" aria-hidden="true" tabindex="-1"></a><span class="fu"># 10. Mechanics of option markets</span></span>
+<span id="cb5-528"><a href="#cb5-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-529"><a href="#cb5-529" aria-hidden="true" tabindex="-1"></a><span class="fu"># 11. Properties of stock options</span></span>
+<span id="cb5-530"><a href="#cb5-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-531"><a href="#cb5-531" aria-hidden="true" tabindex="-1"></a><span class="fu"># 18. Futures options</span></span>
+<span id="cb5-532"><a href="#cb5-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-533"><a href="#cb5-533" aria-hidden="true" tabindex="-1"></a><span class="fu"># 19. The Greek letters</span></span>
+<span id="cb5-534"><a href="#cb5-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-535"><a href="#cb5-535" aria-hidden="true" tabindex="-1"></a><span class="fu"># 20. Volatility smiles</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
