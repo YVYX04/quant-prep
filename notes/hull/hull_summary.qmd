@@ -481,39 +481,188 @@ variable. A **perfect hedge** is one that completely eliminates the risk.
 This chapter focuses on **hedge-and-forget** strategies. We assume that no attempt is made to adjust
 the hedge once it has been put in place. This chapter initially ignores daily settlement for futures.
 
+## 3.1. Basic Principles
+
+Let us suppose we face this basic scenario:
 
 
+> Company A gains USD 10,000 for each increase by 1 cent (over next 3 months) in the price of oil, and lose USD 10,000 for each 1-cent decrease (also over the next three months). How can a futures contract be used to hedge perfectly this position?
+
+The futures should lead to a loss of USD 10,000 for each 1-cent increases over the next 3 months
+and a gain of USD 10,000 for each 1-cent decrease over the next 3 months.
+
+### Short Hedges
+
+A **short hedge** is appropriate for the situation described above: it involves a short position in a futures contract (obligation to deliver at a specified date range). A short hedge is appropriate when the hedger already owns an asset
+and expects to sell it at some time in the future. Let us consider a comprehensive example.
+
+**Short Hedge for Oil**
+
+> We assume that it is May 15 today and that an oil producer has just negotiated
+a contract to sell 1 million barrels of crude oil. It has been agreed that the price that will
+apply in the contract is the market price on August 15. The oil producer is therefore in
+the position where it will gain $10,000 for each 1 cent increase in the price of oil over the
+next 3 months and lose $10,000 for each 1 cent decrease in the price during this period.
+Suppose that on May 15 the spot price is $80 per barrel and the crude oil futures price
+for August delivery is $79 per barrel.
+
+How would you hedge this exposure using futures, and what price would you effectively lock in?
+
+First, we notice that the oil producer is effectively *long* 1 million barrels of oil until August 15.
+Therefore, it should take the opposite position in futures: short 1,000 crude-oil futures at USD 79 (i.e. obligation to sell at USD 79).
+Assuming perfect convergence and ignoring transaction costs/basis differences, this locks in approximately USD 79/barrel.
+To verify this, we can consider two scenarios: 
+
+1. **Spot price Aug. 15 is USD 85**: The company realizes USD 85 per barrel for the oil and loses approximately 85 - 79 = USD 6 per
+barrel on the short futures position; thus making USD 79 / barrel.
+
+2. **Spot price Aug. 15 is USD 75**: The company realizes USD 75 pe barrel for the oil and the value of the futures has appreciated by USD +4 so it actually makes USD 79 / barrel.
+
+**Long Hedges**
+
+Hedges that involve taking a long position in a futures contract are known as long
+hedges. A long hedge is appropriate when a company knows it will have to purchase a
+certain asset in the future and wants to lock in a price now. Let us consider the following scenario:
+
+> A Swiss airline expects to purchase 500,000 gallons of jet fuel in three months. It is currently September 1, and the airline is worried that fuel prices may rise before the purchase date. Jet fuel currently trades at $2.40 per gallon, while a three-month fuel futures contract trades at $2.45 per gallon. Each futures contract covers 42,000 gallons.
+
+What futures position should the airline take, approximately how many contracts should it use, and what effective purchase price would the hedge lock in if the futures and spot prices converge at maturity?
+
+The airline should take a *long* position in $500{,}000 \div 42{,}000 \approx 11.90$ futures contract at USD 2.45.
+The locked-in price is USD 2.45. If the December spot price is above USD 2.45, the futures will appreciate and by closing its
+position and making a profit on it, the airline will recoup the price increase. On the other hand, if the December spot price goes
+below USD 2.45, the airline's futures contract will depreciate and will it face a lower cost for purchasing the fuel, that lower cost is offset
+by the loss of the futures contract.
+
+## 3.2. Arguments for and Against Hedging
+
+The arguments in favor of hedging are so obvious that they hardly need to be stated.
+Most nonfinancial companies are in the business of manufacturing, or retailing or
+wholesaling, or providing a service. They have no particular skills or expertise in
+predicting variables such as interest rates, exchange rates, and commodity prices.
+Thus, it makes sense to hedge.
+
+However, in practice, many risks are left unhedged. This section explores why.
+
+### Hedging and Shareholders
+
+Either shareholders can do the hedging themselves or the shareholders hold a diversified portfolio
+that is tending towards a market neutral position.
+
+### Hedging and Competitors
+
+If hedging is not the norm in a certain industry, it may not make sense for one
+particular company to choose to be diﬀerent from all others. Competitive pressures
+within the industry may be such that the prices of the goods and services produced by
+the industry fluctuate to reflect raw material costs, interest rates, exchange rates, and so
+on. A company that does not hedge can expect its profit margins to be roughly
+constant. However, a company that does hedge can expect its profit margins to
+fluctuate! For instance: hedging gold when you sell jewelry.
+
+### Hedging Can Lead to a Worse Outcome
+
+It is important to realize that a hedge using futures contracts can result in a decrease or
+an increase in a company’s profits relative to the position it would be in with no
+hedging (e.g. example of the oil producer above).
+
+## 3.3. Basis Risk
+
+The **basis** in a hedging situation is as follows:
+
+$$
+\text{Basis} = S - F := b
+$$
+
++ $S$: spot price of asset to be hedged
++ $F$: futures price of contract used
+
+If the asset to be hedged and the asset underlying the futures contract are the same, the
+basis should be zero at the expiration of the futures contract. The hedging risk is the uncertainty associated with the basis,
+this is known as **basis risk**. Basis changes can lead to an improvement or a worsening of a hedger’s
+position.
+
+### Choice of Contract
 
 
+One key factor aﬀecting basis risk is the choice of the futures contract to be used for
+hedging. This choice has two components:
+
+1. The choice of the asset underlying the futures contract
+2. The choice of the delivery month.
+
+If the asset being hedged exactly matches an asset underlying a futures contract, the first
+choice is generally fairly easy. In other circumstances, it is necessary to carry out a
+careful analysis to determine which of the available futures contracts has futures prices
+that are most closely correlated with the price of the asset being hedged.
+
+A good rule of thumb is therefore to choose a delivery month that is as close as possible to, but later than, the expiration of the
+hedge to mitigate delivery-month volatility, the fact that the basis risk increases as the delivery is futher in the future, and the risk
+to not close the position before delivery time.
 
 
+## 3.4. Cross Hedging
 
+**Cross hedging** occurs when the two assets are
+diﬀerent. Consider, for example, an airline that is concerned about the future price
+of jet fuel. Because jet fuel futures are not actively traded, it might choose to use heating
+oil futures contracts to hedge its exposure.
 
+The **hedge ratio** is the ratio of the size of the position taken in futures contracts to the
+size of the exposure. When the asset underlying the futures contract is the same as the
+asset being hedged, it is natural to use a hedge ratio of 1.0.
 
+When cross hedging is used, setting the hedge ratio equal to 1.0 is not always
+optimal. The hedger should choose a value for the hedge ratio that minimizes the
+variance of the value of the hedged position.
 
+### Calculating the Minimum Variance Hedge Ratio
 
+The minimum variance hedge ratio depends on the relationship between changes in the spot price
+and changes in the futures price. Let us define:
 
+- $\Delta S$: change in spot price, $S$, during a period of time equal to the life of the hedge.
+- $\Delta F$: change in the futures price. $F$, during a period of time equal to the life of the hedge.
 
+We will denote the minimum variance hedge ratio by $h^*$. It can be shown that $h^* = \beta$, where:
 
+$$
+\Delta S = \alpha + \beta \Delta F + \varepsilon
+$$
 
+Therefore, we also have $h^* = \rho\frac{\sigma_S}{\sigma_F}$. The coefficient of determination of this regression ($R^2$)
+is defined as the *hedge effectiveness*. This analysis neglects daily settlement. When futures contracts are used for hedging, there is daily settlement and series of one-day hedges.
 
+## 3.5. Stock Index Futures
 
+We now move on to consider stock index futures and how they are used to hedge or manage exposures to equity prices.
+A **stock index** tracks changes in the value of a hypothetical portfolio of stocks. The
+weight of a stock in the portfolio at a particular time equals the proportion of the
+hypothetical portfolio invested in the stock at that time.
 
+### Hedging an Equity Portfolio
 
+Stock index futures can be used to hedge a well-diversified equity portfolio.
+Let us define $V_A$ as being the current value of the portfolio, and $V_F$ as being the current value
+of one futures contract. If the futures mirror the portfolio, we can assume $h^* = 1$:
 
+$$
+N^* = \frac{V_A}{V_F}
+$$
 
+When the portfolio does not mirror the index, we can use the capital asset pricing
+model (CAPM):
 
+$$
+(r_P - r_f) = \alpha + \beta \cdot (r_M - r_f) + \varepsilon
+$$
 
+### Reasons for Hedging an Equity Portfolio
 
-
-
-
-
-
-
-
-
-
+where $r_f$ is the risk free rate, $r_P$ the portfolio returns, and $r_M$ the index returns. In this case, we select $h^* = \beta$.
+**A hedge using index futures removes the risk arising from market moves and leaves the hedger exposed only to the performance of the portfolio relative to the market.** Another reason for hedging may be that the hedger is planning to hold a
+portfolio for a long period of time and requires short-term protection in an uncertain
+market situation. The alternative strategy of selling the portfolio and buying it back
+later might involve unacceptably high transaction costs.
 
 # 4. Interest rates
 

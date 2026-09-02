@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yvan Richard">
-<meta name="dcterms.date" content="2026-09-01">
+<meta name="dcterms.date" content="2026-09-02">
 
 <title>Options, Futures, and Other Derivatives</title>
 <style>
@@ -185,7 +185,13 @@ window.Quarto = {
   <li><a href="#types-of-traders-and-types-of-order" id="toc-types-of-traders-and-types-of-order" class="nav-link" data-scroll-target="#types-of-traders-and-types-of-order">2.8. Types of Traders and Types of Order</a></li>
   <li><a href="#forward-vs.-futures-contracts" id="toc-forward-vs.-futures-contracts" class="nav-link" data-scroll-target="#forward-vs.-futures-contracts">2.11. Forward vs.&nbsp;Futures Contracts</a></li>
   </ul></li>
-  <li><a href="#hedging-strategies-using-futures" id="toc-hedging-strategies-using-futures" class="nav-link" data-scroll-target="#hedging-strategies-using-futures">3. Hedging strategies using futures</a></li>
+  <li><a href="#hedging-strategies-using-futures" id="toc-hedging-strategies-using-futures" class="nav-link" data-scroll-target="#hedging-strategies-using-futures">3. Hedging strategies using futures</a>
+  <ul class="collapse">
+  <li><a href="#basic-principles" id="toc-basic-principles" class="nav-link" data-scroll-target="#basic-principles">3.1. Basic Principles</a>
+  <ul class="collapse">
+  <li><a href="#short-hedges" id="toc-short-hedges" class="nav-link" data-scroll-target="#short-hedges">Short Hedges</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#interest-rates" id="toc-interest-rates" class="nav-link" data-scroll-target="#interest-rates">4. Interest rates</a></li>
   <li><a href="#determination" id="toc-determination" class="nav-link" data-scroll-target="#determination">5. Determination</a></li>
   <li><a href="#interest-rate-futures" id="toc-interest-rate-futures" class="nav-link" data-scroll-target="#interest-rate-futures">6. Interest rate futures</a></li>
@@ -219,7 +225,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2026</p>
+      <p class="date">September 2, 2026</p>
     </div>
   </div>
   
@@ -231,7 +237,7 @@ window.Quarto = {
 </header>
 
 
-<div id="54c7124f" class="cell" data-execution_count="1">
+<div id="eb913348" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -267,7 +273,7 @@ window.Quarto = {
 <section id="sec-1-3" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-1-3">1.3. Forward contracts</h2>
 <p><strong>Forward contract.</strong> A <em>forward contract</em> is an agreement to buy or sell an asset at a certain future time for a certain price. It can be contrasted with a <em>spot</em> contracts which is an agreement to buy or sell immediately. A forward is typically traded in OTC markets. One party assumes a <strong>long position</strong> (i.e.&nbsp;agree to buy the asset at a defined time and price) and the counterparty assumes a <strong>short position</strong> (i.e. agree to sell for the agreed price at the agreed time). This type of contract can be useful to <strong>hedge against FX risk</strong>. For instance, a financial institution (FI) expects to disburse £1m in 6 months, so to protect themselves against FX risks, they purchase a forward (quote is number of USD per GDP).</p>
-<div id="ef892bcd" class="cell" data-execution_count="2">
+<div id="bf3285d7" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>forwards <span class="op">=</span> {</span>
@@ -315,7 +321,7 @@ S_T - K
 <p><span class="math display">\[
 K - S_T
 \]</span></p>
-<div id="a37eac91" class="cell page-columns page-full" data-execution_count="3">
+<div id="14450083" class="cell page-columns page-full" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" data-cap-location="margin"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
@@ -678,6 +684,24 @@ K - S_T
 </section>
 <section id="hedging-strategies-using-futures" class="level1">
 <h1>3. Hedging strategies using futures</h1>
+<p>Many of the participants in futures markets are hedgers. Their aim is to use futures markets to reduce a particular risk that they face. This risk might relate to fluctuations in the price of oil, a foreign exchange rate, the level of the stock market, or some other variable. A <strong>perfect hedge</strong> is one that completely eliminates the risk.</p>
+<p>This chapter focuses on <strong>hedge-and-forget</strong> strategies. We assume that no attempt is made to adjust the hedge once it has been put in place. This chapter initially ignores daily settlement for futures.</p>
+<section id="basic-principles" class="level2">
+<h2 class="anchored" data-anchor-id="basic-principles">3.1. Basic Principles</h2>
+<p>Let us suppose we face this basic scenario:</p>
+<blockquote class="blockquote">
+<p>Company A gains USD 10,000 for each increase by 1 cent (over next 3 months) in the price of oil, and lose USD 10,000 for each 1-cent decrease (also over the next three months). How can a futures contract be used to hedge perfectly this position?</p>
+</blockquote>
+<p>The futures should lead to a loss of USD 10,000 for each 1-cent increases over the next 3 months and a gain of USD 10,000 for each 1-cent decrease over the next 3 months.</p>
+<section id="short-hedges" class="level3">
+<h3 class="anchored" data-anchor-id="short-hedges">Short Hedges</h3>
+<p>A <strong>short hedge</strong> is appropriate for the situation described above: it involves a short position in a futures contract (obligation to deliver at a specified date range). A short hedge is appropriate when the hedger already owns an asset and expects to sell it at some time in the future. Let us consider a comprehensive example.</p>
+<p><strong>Short Hedge for Oil</strong></p>
+<blockquote class="blockquote">
+<p>We assume that it is May 15 today and that an oil producer has just negotiated a contract to sell 1 million barrels of crude oil. It has been agreed that the price that will apply in the contract is the market price on August 15. The oil producer is therefore in the position where it will gain $10,000 for each 1 cent increase in the price of oil over the next 3 months and lose $10,000 for each 1 cent decrease in the price during this period. Suppose that on May 15 the spot price is $80 per barrel and the crude oil futures price for August delivery is $79 per barrel</p>
+</blockquote>
+</section>
+</section>
 </section>
 <section id="interest-rates" class="level1">
 <h1>4. Interest rates</h1>
@@ -1637,60 +1661,86 @@ Hull, John C. 2015. <em>Options, Futures, and Other Derivatives</em>. 9th ed. Pe
 <span id="cb5-479"><a href="#cb5-479" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Delivery or final cash settlement usually takes place <span class="pp">|</span> Contract is usually closed out prior to maturity <span class="pp">|</span></span>
 <span id="cb5-480"><a href="#cb5-480" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Some credit risk <span class="pp">|</span> Virtually no credit risk (initial and maintenance margin) <span class="pp">|</span></span>
 <span id="cb5-481"><a href="#cb5-481" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-482"><a href="#cb5-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-482"><a href="#cb5-482" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3. Hedging strategies using futures</span></span>
 <span id="cb5-483"><a href="#cb5-483" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-484"><a href="#cb5-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-485"><a href="#cb5-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-486"><a href="#cb5-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-487"><a href="#cb5-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-484"><a href="#cb5-484" aria-hidden="true" tabindex="-1"></a>Many of the participants in futures markets are hedgers. Their aim is to use futures</span>
+<span id="cb5-485"><a href="#cb5-485" aria-hidden="true" tabindex="-1"></a>markets to reduce a particular risk that they face. This risk might relate to fluctuations</span>
+<span id="cb5-486"><a href="#cb5-486" aria-hidden="true" tabindex="-1"></a>in the price of oil, a foreign exchange rate, the level of the stock market, or some other</span>
+<span id="cb5-487"><a href="#cb5-487" aria-hidden="true" tabindex="-1"></a>variable. A **perfect hedge** is one that completely eliminates the risk.</span>
 <span id="cb5-488"><a href="#cb5-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-489"><a href="#cb5-489" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-490"><a href="#cb5-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-489"><a href="#cb5-489" aria-hidden="true" tabindex="-1"></a>This chapter focuses on **hedge-and-forget** strategies. We assume that no attempt is made to adjust</span>
+<span id="cb5-490"><a href="#cb5-490" aria-hidden="true" tabindex="-1"></a>the hedge once it has been put in place. This chapter initially ignores daily settlement for futures.</span>
 <span id="cb5-491"><a href="#cb5-491" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-492"><a href="#cb5-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-492"><a href="#cb5-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.1. Basic Principles</span></span>
 <span id="cb5-493"><a href="#cb5-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-494"><a href="#cb5-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-494"><a href="#cb5-494" aria-hidden="true" tabindex="-1"></a>Let us suppose we face this basic scenario:</span>
 <span id="cb5-495"><a href="#cb5-495" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-496"><a href="#cb5-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-497"><a href="#cb5-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-497"><a href="#cb5-497" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Company A gains USD 10,000 for each increase by 1 cent (over next 3 months) in the price of oil, and lose USD 10,000 for each 1-cent decrease (also over the next three months). How can a futures contract be used to hedge perfectly this position?</span></span>
 <span id="cb5-498"><a href="#cb5-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-499"><a href="#cb5-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-500"><a href="#cb5-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-499"><a href="#cb5-499" aria-hidden="true" tabindex="-1"></a>The futures should lead to a loss of USD 10,000 for each 1-cent increases over the next 3 months</span>
+<span id="cb5-500"><a href="#cb5-500" aria-hidden="true" tabindex="-1"></a>and a gain of USD 10,000 for each 1-cent decrease over the next 3 months.</span>
 <span id="cb5-501"><a href="#cb5-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-502"><a href="#cb5-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-502"><a href="#cb5-502" aria-hidden="true" tabindex="-1"></a><span class="fu">### Short Hedges</span></span>
 <span id="cb5-503"><a href="#cb5-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-504"><a href="#cb5-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-505"><a href="#cb5-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-504"><a href="#cb5-504" aria-hidden="true" tabindex="-1"></a>A **short hedge** is appropriate for the situation described above: it involves a short position in a futures contract (obligation to deliver at a specified date range). A short hedge is appropriate when the hedger already owns an asset</span>
+<span id="cb5-505"><a href="#cb5-505" aria-hidden="true" tabindex="-1"></a>and expects to sell it at some time in the future. Let us consider a comprehensive example.</span>
 <span id="cb5-506"><a href="#cb5-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-507"><a href="#cb5-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-507"><a href="#cb5-507" aria-hidden="true" tabindex="-1"></a>**Short Hedge for Oil**</span>
 <span id="cb5-508"><a href="#cb5-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-509"><a href="#cb5-509" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-510"><a href="#cb5-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-511"><a href="#cb5-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-512"><a href="#cb5-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-513"><a href="#cb5-513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-514"><a href="#cb5-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-515"><a href="#cb5-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-509"><a href="#cb5-509" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We assume that it is May 15 today and that an oil producer has just negotiated</span></span>
+<span id="cb5-510"><a href="#cb5-510" aria-hidden="true" tabindex="-1"></a><span class="at">a contract to sell 1 million barrels of crude oil. It has been agreed that the price that will</span></span>
+<span id="cb5-511"><a href="#cb5-511" aria-hidden="true" tabindex="-1"></a><span class="at">apply in the contract is the market price on August 15. The oil producer is therefore in</span></span>
+<span id="cb5-512"><a href="#cb5-512" aria-hidden="true" tabindex="-1"></a><span class="at">the position where it will gain $10,000 for each 1 cent increase in the price of oil over the</span></span>
+<span id="cb5-513"><a href="#cb5-513" aria-hidden="true" tabindex="-1"></a><span class="at">next 3 months and lose $10,000 for each 1 cent decrease in the price during this period.</span></span>
+<span id="cb5-514"><a href="#cb5-514" aria-hidden="true" tabindex="-1"></a><span class="at">Suppose that on May 15 the spot price is $80 per barrel and the crude oil futures price</span></span>
+<span id="cb5-515"><a href="#cb5-515" aria-hidden="true" tabindex="-1"></a><span class="at">for August delivery is $79 per barrel</span></span>
 <span id="cb5-516"><a href="#cb5-516" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-517"><a href="#cb5-517" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-518"><a href="#cb5-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-519"><a href="#cb5-519" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3. Hedging strategies using futures</span></span>
+<span id="cb5-519"><a href="#cb5-519" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-520"><a href="#cb5-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-521"><a href="#cb5-521" aria-hidden="true" tabindex="-1"></a><span class="fu"># 4. Interest rates</span></span>
+<span id="cb5-521"><a href="#cb5-521" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-522"><a href="#cb5-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-523"><a href="#cb5-523" aria-hidden="true" tabindex="-1"></a><span class="fu"># 5. Determination</span></span>
+<span id="cb5-523"><a href="#cb5-523" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-524"><a href="#cb5-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-525"><a href="#cb5-525" aria-hidden="true" tabindex="-1"></a><span class="fu"># 6. Interest rate futures</span></span>
+<span id="cb5-525"><a href="#cb5-525" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-526"><a href="#cb5-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-527"><a href="#cb5-527" aria-hidden="true" tabindex="-1"></a><span class="fu"># 10. Mechanics of option markets</span></span>
+<span id="cb5-527"><a href="#cb5-527" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-528"><a href="#cb5-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-529"><a href="#cb5-529" aria-hidden="true" tabindex="-1"></a><span class="fu"># 11. Properties of stock options</span></span>
+<span id="cb5-529"><a href="#cb5-529" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-530"><a href="#cb5-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-531"><a href="#cb5-531" aria-hidden="true" tabindex="-1"></a><span class="fu"># 18. Futures options</span></span>
+<span id="cb5-531"><a href="#cb5-531" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-532"><a href="#cb5-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-533"><a href="#cb5-533" aria-hidden="true" tabindex="-1"></a><span class="fu"># 19. The Greek letters</span></span>
+<span id="cb5-533"><a href="#cb5-533" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-534"><a href="#cb5-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-535"><a href="#cb5-535" aria-hidden="true" tabindex="-1"></a><span class="fu"># 20. Volatility smiles</span></span>
+<span id="cb5-535"><a href="#cb5-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-536"><a href="#cb5-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-537"><a href="#cb5-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-538"><a href="#cb5-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-539"><a href="#cb5-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-540"><a href="#cb5-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-541"><a href="#cb5-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-542"><a href="#cb5-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-543"><a href="#cb5-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-544"><a href="#cb5-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-545"><a href="#cb5-545" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-546"><a href="#cb5-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-547"><a href="#cb5-547" aria-hidden="true" tabindex="-1"></a><span class="fu"># 4. Interest rates</span></span>
+<span id="cb5-548"><a href="#cb5-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-549"><a href="#cb5-549" aria-hidden="true" tabindex="-1"></a><span class="fu"># 5. Determination</span></span>
+<span id="cb5-550"><a href="#cb5-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-551"><a href="#cb5-551" aria-hidden="true" tabindex="-1"></a><span class="fu"># 6. Interest rate futures</span></span>
+<span id="cb5-552"><a href="#cb5-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-553"><a href="#cb5-553" aria-hidden="true" tabindex="-1"></a><span class="fu"># 10. Mechanics of option markets</span></span>
+<span id="cb5-554"><a href="#cb5-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-555"><a href="#cb5-555" aria-hidden="true" tabindex="-1"></a><span class="fu"># 11. Properties of stock options</span></span>
+<span id="cb5-556"><a href="#cb5-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-557"><a href="#cb5-557" aria-hidden="true" tabindex="-1"></a><span class="fu"># 18. Futures options</span></span>
+<span id="cb5-558"><a href="#cb5-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-559"><a href="#cb5-559" aria-hidden="true" tabindex="-1"></a><span class="fu"># 19. The Greek letters</span></span>
+<span id="cb5-560"><a href="#cb5-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-561"><a href="#cb5-561" aria-hidden="true" tabindex="-1"></a><span class="fu"># 20. Volatility smiles</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
