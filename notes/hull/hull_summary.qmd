@@ -666,7 +666,234 @@ later might involve unacceptably high transaction costs.
 
 # 4. Interest rates
 
-# 5. Determination
+Interest rates are a factor in the valuation of virtually all derivatives and will feature
+prominently in much of the material that will be presented in the rest of this book. This
+chapter deals with some fundamental issues concerned with the way interest rates are
+measured and analyzed.
+
+## 4.1. Types of Rates
+
++ **Treasury rates**: Treasury rates are the rates an investor earns on Treasury bills and Treasury bonds. These are the instruments used by a government to borrow in its own currency.
+
++ **LIBOR**: LIBOR is short for London Interbank Oﬀered Rate. It is an unsecured short-term borrowing rate between banks. LIBOR rates have traditionally been calculated each business day for 10 currencies and 15 borrowing periods.
+
++ **The Fed Funds Rate**: In the United States, financial institutions are required to maintain a certain amount of
+cash (known as reserves) with the Federal Reserve. The reserve requirement for a bank
+at any time depends on its outstanding assets and liabilities. At the end of a day, some
+financial institutions typically have surplus funds in their accounts with the Federal
+Reserve while others have requirements for funds. This leads to borrowing and lending
+overnight. In the United States, the overnight rate is called the federal funds rate. A
+broker usually matches borrowers and lenders. The weighted average of the rates in
+brokered transactions (with weights being determined by the size of the transaction) is
+termed the eﬀective federal funds rate. This overnight rate is monitored by the central
+bank, which may intervene with its own transactions in an attempt to raise or lower it.
+
++ **Risk-free rate**: Derivatives are usually valued by setting up a riskless portfolio and arguing that the
+return on the portfolio should be the risk-free interest rate. The risk-free interest rate
+therefore plays a key role in the valuation of derivatives. In practice, selecting one is tricky.
+
+## 4.2. Measuring Interest Rates
+
+If the interest rate is compounded $m$ times per annum, the terminal value of the investment is:
+
+$$
+A\bigl(1 + \frac{r}{m}\bigr)^{mn}
+$$
+
+We also have continuous compounding:
+
+$$
+Ae^{rn}
+$$
+
+In this book, interest rates will be measured with continuous compounding except
+where stated otherwise.
+
+## 4.3. Zero Rates
+
+The n-year zero-coupon interest rate is the rate of interest earned on an investment that
+starts today and lasts for n years. All the interest and principal is realized at the end of
+n years. There are no intermediate payments. Suppose a 5-year zero rate with continuous compounding is quoted as 5% per
+annum. This means that USD 100, if invested for 5 years, grows to:
+
+$$
+100e^{0.05 \cdot 5} = 128.40
+$$
+
+
+## `TO BE CONTINUED`
+
+
+# 5. Determination of Forward and Futures Prices
+
+In this chapter we examine how forward prices and futures prices are related to the spot
+price of the underlying asset. Forward contracts are easier to analyze than futures
+contracts because there is no daily settlement—only a single payment at maturity. We
+therefore start this chapter by considering the relationship between the forward price
+and the spot price.
+
+## 5.1. Investment Assets vs. Consumption Assets
+
+An *investment* asset is an asset that is held
+for investment purposes by at least some traders. Stocks and bonds are clearly
+investment assets. Gold and silver are also examples of investment assets. Note that
+investment assets do not have to be held exclusively for investment. (Silver, for
+example, has a number of industrial uses.) However, they do have to satisfy the
+requirement that they are held by some traders solely for investment. A *consumption*
+asset is an asset that is held primarily for consumption.
+
+## 5.2. Short Selling
+
+Some of the arbitrage strategies presented in this chapter involve **short selling**. This
+trade, usually simply referred to as "shorting", involves selling an asset that is not
+owned.
+
+The investor is required to maintain a **margin account** with the broker. The margin
+account consists of cash or marketable securities deposited by the investor with the
+broker to guarantee that the investor will not walk away from the short position if the
+share price increases.
+
+An initial margin is required and if there are adverse movements (i.e.,
+increases) in the price of the asset that is being shorted, additional margin may be
+required. If the additional margin is not provided, the short position is closed out. The
+margin account does not represent a cost to the investor. This is because interest is
+usually paid on the balance in margin accounts.
+
+Occasionally there are temporary bans on short selling. This happened in a
+number of countries in 2008 because it was considered that short selling contributed to
+the high market volatility that was being experienced.
+
+## 5.3. Assumptions and Notation
+
+In this chapter we will assume that the following are all true for some market
+participants:
+
+1. The market participants are subject to no transaction costs when they trade.
+2. The market participants are subject to the same tax rate on all net trading profits.
+3. The market participants can borrow money at the same risk-free rate of interest as they can lend money.
+4. The market participants take advantage of arbitrage opportunities as they occur.
+
+The following notation will be used throughout this chapter:
+
+- $T$ : Time until delivery date in a forward or futures contract (in years)
+- $S_0$ : Price of the asset underlying the forward or futures contract today
+- $F_0$ : Forward or futures price today
+- $r$: Zero-coupon risk-free rate of interest per annum, expressed with continuous compounding, for an investment maturing at the delivery date (i.e., in T years).
+
+## 5.4. Forward price for an Investment Asset
+
+The easiest forward contract to value is one written on an investment asset that provides
+the holder with no income. Non-dividend-paying stocks and zero-coupon bonds are
+examples of such investment assets. We consider a no-arbitrage assumption for pricing the forward.
+
+### A Generalization
+
+We consider a forward contract on an investment asset with
+price $S_0$ that provides no income. Using our notation, $T$ is the time to maturity, $r$ is the
+risk-free rate, and $F_0$ is the forward price. The relationship between $F_0$ and $S_0$ is:
+
+$$
+F_0 = S_0 e^{rT}
+$$
+
+This means that the value of the forward contract with delivery date $T$ at time $t = 0$ is the spot price of the underlying asset $S(t = 0)$ continuously compounded at rate $r$ over $t = T$. To show that under no arbitrage this relation must hold, let us consider:
+
+$$
+F_0 > S_0 e^{rT}
+$$
+
+In this case, I can exploit this situation by borrowing at the risk free rate $r$ and buying at $S_0$, while simultaneously shorting a forward contract.
+At maturity $T$, our loan is worth $S_0 e^{rT}$ and we deliver the asset to receive $F_T$; thus making a **riskless* profit.
+
+Now, let us consider the opposite case:
+
+$$
+F_0 < S_0 e^{rT}
+$$
+
+Now, I short the stock at $S_0$ and invest $S_0$ at the risk free rate $r$. I simultaneously go
+long on the forward contract at delivery price $F_0$ (i.e. At time $T$, I am obligated to buy one unit of the asset for $F_0$). At time $T$, I will have accumulated $S_0 e^{rT}$.
+I use $F_0$ of this money to buy the asset through the forward contract. I then return that asset to cover my short position, thus making
+a profit of $S_0 e^{rT} - F_0 > 0$.
+
+## 5.5. Known Income
+
+In this section we consider a forward contract on an investment asset that will provide a
+perfectly predictable cash income to the holder. Examples are stocks paying known
+dividends and coupon-bearing bonds. We adopt the same approach as in the previous
+section.
+
+### Generalization
+
+We can generalize to argue that, when an investment asset will
+provide income with a present value of $I$ during the life of a forward contract, we have
+
+$$
+F_0 = (S_0 - I)e^{rT}
+$$
+
+The intuition is that the forward holder does not own the asset before $T$, so they do not receive this income. The spot buyer does. Hence the forward price must be lower than $S_0e^{rT}$ to account for that advantage.
+
+## 5.6. Known Yield
+
+We now consider the situation where the asset underlying a forward contract provides a
+known yield rather than a known cash income. This means that the income is known
+when expressed as a percentage of the asset’s price at the time the income is paid.
+
+With a continuously compounded yield $q$, the forward pricing formula becomes
+
+$$
+F_0=S_0e^{(r-q)T}
+$$
+
+Here is the intuition. Without any income, buying the asset today at $S_0$ and holding it until $T$ has an opportunity cost of
+$S_0e^{rT}$. But if the asset continuously provides a yield $q$, holding the asset gives you a benefit during the period. This benefit effectively reduces the cost of carrying the asset from $r$ to $r-q$.
+
+## 5.7. Valuing Forward Contracts 
+
+The value of a forward contract at the time it is first entered into is close to zero. At a
+later stage, it may prove to have a positive or negative value. It is important for banks
+and other financial institutions to value the contract each day. (This is referred to as
+marking to market the contract.) Using the notation introduced earlier, we suppose $K$ is
+the delivery price for a contract that was negotiated some time ago, the delivery date is
+$T$ years from today, and $r$ is the $T$-year risk-free interest rate. The variable $F_0$ is the
+forward price that would be applicable if we negotiated the contract today. In addition,
+we define $f$ to be the value of forward contract today.
+
+At time $t = 0$, we have $f(t = 0) = 0, K = F_0$. Over time the price of the forward changes
+and the value of the entered contract $f$ also. A general result, applicable to all long forward contracts (both those on investment
+assets and those on consumption assets), is:
+
+$$
+f = (F_0 - K)e^{-rT}
+$$
+
+This relationship can be proved with the same no-arbitrage condition we used earlier.
+Let us say we compose a portfolio with two forward contracts, one long position at $K$, one short position at $F_0$.
+At time $T$, we buy the asset at $K$ and makes a profit (or loss) of $S_T - K$. Furthermore, we sell the asset at $F_0$ and
+make a profit of $F_0 - S_T$; the total payoff is $F_0 - K$. Continuously discounted at present value with the risk free rate $r$, our riskless profit
+is worth:
+
+$$
+e^{-rT}(F_0 - K)
+$$
+
+A short forward is worth:
+
+$$
+f = (K - F_0) e^{-rT}
+$$
+
+Finally, we can re-introduce our previous results for $F_0$ in $f$.
+For a long forward with no income or yield:
+
+$$
+f = (S_0e^{rT} - F_0)e^{rT} = S_0 - F_0e^{rT}
+$$
+
+We can do the same with the other equations.
+
+## `TO BE CONTINUED.`
 
 # 6. Interest rate futures
 
