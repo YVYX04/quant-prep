@@ -897,7 +897,21 @@ We can do the same with the other equations.
 
 # 6. Interest rate futures
 
+## `TO BE WRITTEN`
+
 # 10. Mechanics of option markets
+
+This chapter explains how options markets are
+organized, what terminology is used, how the contracts are traded, how margin
+requirements are set, and so on. Later chapters will examine such topics as trading
+strategies involving options, the determination of option prices, and the ways in which
+portfolios of options can be hedged. This chapter is concerned primarily with stock
+options.
+
+**Options are fundamentally diﬀerent from forward and futures contracts. An option gives the holder of the option the right to do something, but the holder does not have to exercise this right**. By contrast, in a forward or futures contract, the two parties have
+committed themselves to some action. It costs a trader nothing (except for the margin/
+collateral requirements) to enter into a forward or futures contract, whereas the
+purchase of an option requires an up-front payment. 
 
 # 11. Properties of stock options
 
